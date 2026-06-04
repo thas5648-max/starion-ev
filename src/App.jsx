@@ -55,8 +55,6 @@ const [newEmployeeDepartment, setNewEmployeeDepartment] = useState("");
     setUserName(data.name);
 setCurrentEmployeeId(data.employee_id);
 
-alert(JSON.stringify(data));
-
 setUserRole(data.role);
     console.log("ROLE =", data.role);
 

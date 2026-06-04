@@ -54,7 +54,7 @@ const [newEmployeeDepartment, setNewEmployeeDepartment] = useState("");
 
     setUserName(data.name);
     setCurrentEmployeeId(data.employee_id);
-    setUserRole(data.role);
+    setUserRole(data.department);
     console.log("ROLE =", data.role);
 
 await loadAttendance();
@@ -82,7 +82,7 @@ await loadAttendance();
 >
   퇴근 등록
 </button>
-{userRole === "admin" && (
+{userRole === "ADMIN" && (
      <>
 <h3>직원 등록</h3>
 

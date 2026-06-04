@@ -127,6 +127,12 @@ await loadAttendance();
   {attendanceList.map((item) => (
     <li key={item.id}>
       {item.employee_id}
+      {" | "}
+      {item.check_in
+        ? new Date(item.check_in).toLocaleTimeString()
+        : "-"}
+      {" | "}
+      {item.status}
     </li>
   ))}
 </ul>

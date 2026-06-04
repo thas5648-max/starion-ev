@@ -84,6 +84,17 @@ await loadAttendance();
 >
   퇴근 등록
 </button>
+<button
+  className="login-btn"
+  onClick={() => {
+    setLoggedIn(false);
+    setUserName("");
+    setUserRole("");
+    setCurrentEmployeeId("");
+  }}
+>
+  로그아웃
+</button>
 {userRole === "admin" && (
      <>
 <h3>직원 등록</h3>

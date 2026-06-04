@@ -288,7 +288,6 @@ if (existing && existing.length > 0) {
 
 async function loadAttendance() {
 
-
   const { data, error } = await supabase
   .from("attendance")
   .select(`
@@ -302,7 +301,8 @@ async function loadAttendance() {
     console.log(error);
     return;
   }
-
+console.log("선택 날짜 =", selectedDate);
+console.log("조회 결과 =", data);
   setAttendanceList(data);
 }
 

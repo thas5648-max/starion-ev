@@ -138,12 +138,18 @@ await loadAttendance();
   {attendanceList.map((item) => (
     <li key={item.id}>
       {item.employee_id}
-      {" | "}
-      {item.check_in
-        ? new Date(item.check_in).toLocaleTimeString()
-        : "-"}
-      {" | "}
-      {item.status}
+{" | "}
+{item.employees?.name || "-"}
+{" | "}
+{item.check_in
+  ? new Date(item.check_in).toLocaleTimeString()
+  : "-"}
+{" | "}
+{item.check_out
+  ? new Date(item.check_out).toLocaleTimeString()
+  : "-"}
+{" | "}
+{item.status}
     </li>
   ))}
 </ul>
@@ -277,10 +283,14 @@ async function loadAttendance() {
   const today = new Date().toISOString().split("T")[0];
 
   const { data, error } = await supabase
-    .from("attendance")
-    .select("*")
-    .eq("attendance_date", today);
-
+  .from("attendance")
+  .select(`
+    *,
+    employees (
+      name
+    )
+  `)
+  .eq("attendance_date", today);
   if (error) {
     console.log(error);
     return;

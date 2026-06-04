@@ -8,6 +8,7 @@ export default function App() {
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
+  const [userRole, setUserRole] = useState("");
   const [currentEmployeeId, setCurrentEmployeeId] = useState("");
   const [attendanceList, setAttendanceList] = useState([]);
   const [newEmployeeId, setNewEmployeeId] = useState("");
@@ -53,6 +54,7 @@ const [newEmployeeDepartment, setNewEmployeeDepartment] = useState("");
 
     setUserName(data.name);
     setCurrentEmployeeId(data.employee_id);
+    setUserRole(data.role);
     setLoggedIn(true);
   }
 
@@ -76,6 +78,8 @@ const [newEmployeeDepartment, setNewEmployeeDepartment] = useState("");
 >
   퇴근 등록
 </button>
+{userRole === "admin" && (
+     <>
 <h3>직원 등록</h3>
 
 <input
@@ -108,6 +112,9 @@ const [newEmployeeDepartment, setNewEmployeeDepartment] = useState("");
 >
   직원 등록
 </button>
+</>
+)}
+
 <h3>오늘 출근자</h3>
 
 <ul>

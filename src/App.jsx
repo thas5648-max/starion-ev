@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "./supabase";
 import "./App.css";
 
@@ -15,6 +15,9 @@ export default function App() {
 const [newEmployeeName, setNewEmployeeName] = useState("");
 const [newEmployeePassword, setNewEmployeePassword] = useState("");
 const [newEmployeeDepartment, setNewEmployeeDepartment] = useState("");
+const [selectedDate, setSelectedDate] = useState(
+  new Date().toISOString().split("T")[0]
+);
 
   const text = {
     es: {
@@ -71,6 +74,11 @@ await loadAttendance();
 
           <h2>{userName}</h2>
           <h3>ROLE: {userRole}</h3>
+          <input
+  type="date"
+  value={selectedDate}
+  onChange={(e) => setSelectedDate(e.target.value)}
+/>
 
           <button
   className="login-btn"
@@ -280,7 +288,6 @@ if (existing && existing.length > 0) {
 
 async function loadAttendance() {
 
-  const today = new Date().toISOString().split("T")[0];
 
   const { data, error } = await supabase
   .from("attendance")
@@ -290,7 +297,7 @@ async function loadAttendance() {
       name
     )
   `)
-  .eq("attendance_date", today);
+  .eq("attendance_date", selectedDate);
   if (error) {
     console.log(error);
     return;
@@ -298,6 +305,10 @@ async function loadAttendance() {
 
   setAttendanceList(data);
 }
+
+useEffect(() => {
+  loadAttendance();
+}, [selectedDate]);
 async function handleCheckOut() {
 
   const today = new Date().toISOString().split("T")[0];

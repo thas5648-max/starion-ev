@@ -53,9 +53,11 @@ const [newEmployeeDepartment, setNewEmployeeDepartment] = useState("");
     }
 
     setUserName(data.name);
-    setCurrentEmployeeId(data.employee_id);
-    alert("ROLE = " + data.role);
-    setUserRole(data.role);
+setCurrentEmployeeId(data.employee_id);
+
+alert(JSON.stringify(data));
+
+setUserRole(data.role);
     console.log("ROLE =", data.role);
 
 await loadAttendance();
@@ -70,7 +72,7 @@ await loadAttendance();
           <h1>{t.welcome}</h1>
 
           <h2>{userName}</h2>
-          <h3>ROLE: TEST123</h3>
+          <h3>ROLE: {userRole}</h3>
 
           <button
   className="login-btn"

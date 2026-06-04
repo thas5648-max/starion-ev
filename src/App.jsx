@@ -77,7 +77,10 @@ await loadAttendance();
           <input
   type="date"
   value={selectedDate}
-  onChange={(e) => setSelectedDate(e.target.value)}
+  onChange={(e) => {
+    console.log("날짜 변경됨 =", e.target.value);
+    setSelectedDate(e.target.value);
+  }}
 />
 
           <button

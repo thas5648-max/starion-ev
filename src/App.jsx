@@ -290,7 +290,7 @@ if (existing && existing.length > 0) {
 }
 
 async function loadAttendance() {
-
+console.log("loadAttendance 날짜 =", selectedDate);
   const { data, error } = await supabase
   .from("attendance")
   .select(`
@@ -310,6 +310,7 @@ console.log("조회 결과 =", data);
 }
 
 useEffect(() => {
+  console.log("useEffect 실행", selectedDate);
   loadAttendance();
 }, [selectedDate]);
 async function handleCheckOut() {

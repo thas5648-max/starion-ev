@@ -69,6 +69,7 @@ await loadAttendance();
           <h1>{t.welcome}</h1>
 
           <h2>{userName}</h2>
+          <h3>ROLE: {userRole}</h3>
 
           <button
   className="login-btn"

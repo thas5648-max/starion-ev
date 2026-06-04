@@ -176,27 +176,7 @@ await loadAttendance();
     </div>
   );
 
-async function handleLogin() {
 
-  const { data, error } = await supabase
-    .from("employees")
-    .select("*")
-    .eq("employee_id", employeeId)
-    .eq("password_hash", password)
-    .single();
-
-  if (error || !data) {
-    alert(t.invalid);
-    return;
-  }
-
-  setUserName(data.name);
-setCurrentEmployeeId(data.employee_id);
-
-await loadAttendance();
-
-setLoggedIn(true);
-}
 
 async function handleCheckIn() {
 

@@ -55,16 +55,15 @@ export default function App() {
       return;
     }
 
-    setUserName(data.name);
-setCurrentEmployeeId(data.employee_id);
-
-setUserRole(data.role);
+   setUserRole(data.role);
 
 alert("BEFORE LOAD");
 
 await loadAttendance(selectedDate);
 
 alert("AFTER LOAD");
+
+alert("BEFORE LOGIN");
 
 setLoggedIn(true);
 

@@ -67,7 +67,7 @@ alert("AFTER LOAD");
 
 setLoggedIn(true);
 
-alert("AFTER STATE");
+alert("AFTER SETLOGGEDIN");
   }
 
   if (loggedIn) {

@@ -331,6 +331,9 @@ console.log(JSON.stringify(data, null, 2));
 alert("LOAD END");
 
 setAttendanceList(data);
+alert("SET START");
+setAttendanceList(data);
+alert("SET END");
 
 
 

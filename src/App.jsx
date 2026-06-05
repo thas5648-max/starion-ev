@@ -160,11 +160,14 @@ alert("AFTER LOGIN");
           <h3 style={{ color: "red" }}>
             REAL BLOCK
           </h3>
-          <h3>LIST COUNT : {attendanceList.length}</h3>
-          <ul>
-  <li>TEST</li>
-  <li>MAP START</li>
+          {/*
+<h3>LIST COUNT : {attendanceList.length}</h3>
+
+<ul>
+<li>TEST</li>
+<li>MAP START</li>
 </ul>
+*/}
         </div>
       </div>
     );

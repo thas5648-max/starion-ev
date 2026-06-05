@@ -334,11 +334,12 @@ data.forEach(item => {
 
 useEffect(() => {
 
-  console.log("useEffect 실행", selectedDate);
+  alert("USEEFFECT DATE = " + selectedDate);
 
   loadAttendance(selectedDate);
 
 }, [selectedDate]);
+
 async function handleCheckOut() {
 
   const today = new Date().toISOString().split("T")[0];

@@ -19,6 +19,10 @@ export default function App() {
     new Date().toISOString().split("T")[0]
   );
 
+useEffect(() => {
+    loadAttendance(selectedDate);
+}, [selectedDate]);
+
   const text = {
     es: {
       title: "STARION EV",
@@ -327,13 +331,7 @@ alert("SET END");
 
 
 
-    useEffect(() => {
-
-      alert("USEEFFECT DATE = " + selectedDate);
-
-      loadAttendance(selectedDate);
-
-    }, [selectedDate]);
+   
 
     async function handleCheckOut() {
 

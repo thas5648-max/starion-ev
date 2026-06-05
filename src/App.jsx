@@ -297,7 +297,10 @@ if (existing && existing.length > 0) {
 }
 
 async function loadAttendance(date) {
+
   alert("loadAttendance: " + selectedDate);
+  alert("parameter date = " + date);
+
 console.log("loadAttendance 날짜 =", selectedDate);
  const { data, error } = await supabase
   .from("attendance")
@@ -313,6 +316,7 @@ console.log("loadAttendance 날짜 =", selectedDate);
     return;
   }
 console.log("선택 날짜 =", selectedDate);
+console.log("date parameter =", date);
 console.log(JSON.stringify(data, null, 2));
 alert("ROWS = " + data.length);
 

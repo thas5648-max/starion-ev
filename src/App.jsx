@@ -60,13 +60,15 @@ setCurrentEmployeeId(data.employee_id);
 
 setUserRole(data.role);
 
+alert("BEFORE LOAD");
+
 await loadAttendance(selectedDate);
 
 alert("AFTER LOAD");
 
 setLoggedIn(true);
 
-alert("AFTER SETLOGGEDIN");
+alert("AFTER LOGIN");
   }
 
   if (loggedIn) {

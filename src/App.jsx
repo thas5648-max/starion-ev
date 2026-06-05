@@ -56,18 +56,18 @@ export default function App() {
     }
 
     setUserName(data.name);
-    setCurrentEmployeeId(data.employee_id);
+setCurrentEmployeeId(data.employee_id);
+setUserRole(data.role);
 
-    setUserRole(data.role);
-    console.log("ROLE =", data.role);
+alert("BEFORE LOAD");
 
-    await loadAttendance(selectedDate);
+await loadAttendance(selectedDate);
 
-alert("LOGIN OK");
+alert("AFTER LOAD");
 
 setLoggedIn(true);
 
-alert("STATE CHANGE REQUEST");
+alert("AFTER STATE");
   }
 
   if (loggedIn) {
@@ -395,4 +395,4 @@ setAttendanceList(data);
       setNewEmployeeDepartment("");
     }
   }
-  }
+}

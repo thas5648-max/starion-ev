@@ -82,7 +82,7 @@ LOGGED IN SCREEN
   value={selectedDate}
   onChange={(e) => {
     alert("선택값 = " + e.target.value);
-    
+
     console.log("날짜 변경됨 =", e.target.value);
     setSelectedDate(e.target.value);
   }}
@@ -302,6 +302,7 @@ async function loadAttendance(date) {
 
   alert("loadAttendance: " + selectedDate);
   alert("parameter date = " + date);
+  alert("REACHED QUERY");
 
 console.log("loadAttendance 날짜 =", selectedDate);
  const { data, error } = await supabase

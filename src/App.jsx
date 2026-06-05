@@ -299,9 +299,14 @@ if (existing && existing.length > 0) {
 async function loadAttendance(date) {
   alert("loadAttendance: " + selectedDate);
 console.log("loadAttendance 날짜 =", selectedDate);
-  const { data, error } = await supabase
+ const { data, error } = await supabase
   .from("attendance")
-  .select("*")
+  .select(`
+    *,
+    employees (
+      name
+    )
+  `)
   .eq("attendance_date", date);
   if (error) {
     console.log(error);

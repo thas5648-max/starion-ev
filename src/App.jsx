@@ -63,7 +63,11 @@ export default function App() {
 
     await loadAttendance(selectedDate);
 
-    setLoggedIn(true);
+alert("LOGIN OK");
+
+setLoggedIn(true);
+
+alert("STATE CHANGE REQUEST");
   }
 
   if (loggedIn) {
@@ -130,7 +134,7 @@ export default function App() {
 
               <input
                 placeholder="비밀번호"
-                value={newEmployeePassword}
+                value={newEmployeePassword}Z
                 onChange={(e) => setNewEmployeePassword(e.target.value)}
               />
 
@@ -322,14 +326,12 @@ export default function App() {
       return;
     }
     console.log("선택 날짜 =", selectedDate);
-    console.log("date parameter =", date);
-    console.log(JSON.stringify(data, null, 2));
+console.log("date parameter =", date);
+console.log(JSON.stringify(data, null, 2));
 
-    alert(
-      JSON.stringify(data, null, 2)
-    );
+alert("LOAD END");
 
-    setAttendanceList(data);
+setAttendanceList(data);
 
 
 

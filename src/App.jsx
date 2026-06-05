@@ -63,6 +63,8 @@ await loadAttendance(selectedDate);
 
 alert("AFTER LOAD");
 
+return;
+
 alert("BEFORE LOGIN");
 
 setLoggedIn(true);

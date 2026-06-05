@@ -67,6 +67,9 @@ await loadAttendance();
   }
 
   if (loggedIn) {
+    <h1 style={{color:"blue"}}>
+LOGGED IN SCREEN
+</h1>
     return (
       <div className="container">
         <div className="login-card">

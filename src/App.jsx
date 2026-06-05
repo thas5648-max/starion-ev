@@ -144,7 +144,10 @@ await loadAttendance();
 )}
 
 <h3>{selectedDate} 근태 현황</h3>
-
+<h3 style={{color:"red"}}>
+REAL BLOCK
+</h3>
+<h3>LIST COUNT : {attendanceList.length}</h3>
 <ul>
   <li>TEST</li>
   {attendanceList.map((item) => (

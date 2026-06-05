@@ -146,6 +146,7 @@ await loadAttendance();
 <h3>{selectedDate} 근태 현황</h3>
 
 <ul>
+  <li>TEST</li>
   {attendanceList.map((item) => (
     <li key={item.id}>
       {item.employee_id}

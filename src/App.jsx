@@ -305,9 +305,8 @@ if (existing && existing.length > 0) {
 
 async function loadAttendance(date) {
 
-  alert("loadAttendance: " + selectedDate);
-  alert("parameter date = " + date);
-  alert("REACHED QUERY");
+  alert("selectedDate = " + selectedDate);
+alert("date = " + date);
 
 console.log("loadAttendance 날짜 =", selectedDate);
  const { data, error } = await supabase

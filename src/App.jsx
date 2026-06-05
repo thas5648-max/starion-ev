@@ -163,25 +163,9 @@ alert("AFTER LOGIN");
           </h3>
           <h3>LIST COUNT : {attendanceList.length}</h3>
           <ul>
-            <li>TEST</li>
-            {attendanceList.map((item) => (
-              <li key={item.id}>
-                {item.employee_id}
-                {" | "}
-                {item.employees?.name || "-"}
-                {" | "}
-                {item.check_in
-                  ? new Date(item.check_in).toLocaleTimeString()
-                  : "-"}
-                {" | "}
-                {item.check_out
-                  ? new Date(item.check_out).toLocaleTimeString()
-                  : "-"}
-                {" | "}
-                {item.status}
-              </li>
-            ))}
-          </ul>
+  <li>TEST</li>
+  <li>MAP START</li>
+</ul>
         </div>
       </div>
     );

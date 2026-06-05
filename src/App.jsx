@@ -143,7 +143,7 @@ await loadAttendance();
 </>
 )}
 
-<h3>오늘 출근자</h3>
+<h3>{selectedDate} 근태 현황</h3>
 
 <ul>
   {attendanceList.map((item) => (

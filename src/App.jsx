@@ -305,7 +305,7 @@ console.log("loadAttendance 날짜 =", selectedDate);
     return;
   }
 console.log("선택 날짜 =", selectedDate);
-console.log("조회 결과 =", data);
+console.log(JSON.stringify(data, null, 2));
   setAttendanceList(data);
 }
 

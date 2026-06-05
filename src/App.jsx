@@ -57,9 +57,8 @@ export default function App() {
 
     setUserName(data.name);
 setCurrentEmployeeId(data.employee_id);
-setUserRole(data.role);
 
-alert("BEFORE LOAD");
+setUserRole(data.role);
 
 await loadAttendance(selectedDate);
 

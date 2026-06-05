@@ -324,13 +324,14 @@ console.log("loadAttendance 날짜 =", selectedDate);
 console.log("선택 날짜 =", selectedDate);
 console.log("date parameter =", date);
 console.log(JSON.stringify(data, null, 2));
-alert("ROWS = " + data.length);
 
-data.forEach(item => {
-  alert(item.employee_id);
-});
-  setAttendanceList(data);
-}
+alert(
+  JSON.stringify(data, null, 2)
+);
+
+setAttendanceList(data);
+
+
 
 useEffect(() => {
 

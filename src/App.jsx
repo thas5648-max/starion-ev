@@ -298,13 +298,8 @@ async function loadAttendance() {
 console.log("loadAttendance 날짜 =", selectedDate);
   const { data, error } = await supabase
   .from("attendance")
-  .select(`
-    *,
-    employees (
-      name
-    )
-  `)
-  .eq("attendance_date", selectedDate);
+  .select("*")
+.eq("attendance_date", selectedDate);
   if (error) {
     console.log(error);
     return;

@@ -67,9 +67,7 @@ await loadAttendance(selectedDate);
   }
 
   if (loggedIn) {
-    <h1 style={{color:"blue"}}>
-LOGGED IN SCREEN
-</h1>
+    
     return (
       <div className="container">
         <div className="login-card">
@@ -82,14 +80,7 @@ LOGGED IN SCREEN
   value={selectedDate}
   onChange={(e) => {
 
-  const newDate = e.target.value;
-
-  alert("NEW DATE = " + newDate);
-
-  setSelectedDate(newDate);
-
-  alert("STATE UPDATE REQUEST");
-
+  setSelectedDate(e.target.value);
 }}
 />
 
@@ -154,6 +145,9 @@ LOGGED IN SCREEN
 )}
 
 <h3>{selectedDate} 근태 현황</h3>
+<h4 style={{color:"red"}}>
+STATE = {selectedDate}
+</h4>
 <h3 style={{color:"red"}}>
 REAL BLOCK
 </h3>

@@ -78,9 +78,14 @@ await loadAttendance(selectedDate);
           <input
   type="date"
   value={selectedDate}
-  onChange={(e) => {
+ onChange={(e) => {
+  alert("NEW DATE = " + e.target.value);
 
   setSelectedDate(e.target.value);
+
+  setTimeout(() => {
+    alert("STATE AFTER = " + selectedDate);
+  }, 100);
 }}
 />
 

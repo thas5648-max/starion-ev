@@ -310,7 +310,10 @@ console.log(JSON.stringify(data, null, 2));
 }
 
 useEffect(() => {
-  alert("useEffect 실행: " + selectedDate);
+  alert("USE EFFECT: " + selectedDate);
+
+  console.log("useEffect 실행", selectedDate);
+
   loadAttendance();
 }, [selectedDate]);
 async function handleCheckOut() {

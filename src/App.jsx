@@ -61,7 +61,7 @@ setCurrentEmployeeId(data.employee_id);
 setUserRole(data.role);
     console.log("ROLE =", data.role);
 
-await loadAttendance();
+await loadAttendance(selectedDate);
 
     setLoggedIn(true);
   }
@@ -291,18 +291,18 @@ if (existing && existing.length > 0) {
     return;
   }
 
-  await loadAttendance();
+  await loadAttendance(selectedDate);
 
   alert("출근 등록 완료");
 }
 
-async function loadAttendance() {
+async function loadAttendance(date) {
   alert("loadAttendance: " + selectedDate);
 console.log("loadAttendance 날짜 =", selectedDate);
   const { data, error } = await supabase
   .from("attendance")
   .select("*")
-  .eq("attendance_date", selectedDate);
+  .eq("attendance_date", date);
   if (error) {
     console.log(error);
     return;
@@ -313,11 +313,11 @@ console.log(JSON.stringify(data, null, 2));
 }
 
 useEffect(() => {
-  alert("USE EFFECT: " + selectedDate);
 
   console.log("useEffect 실행", selectedDate);
 
-  loadAttendance();
+  loadAttendance(selectedDate);
+
 }, [selectedDate]);
 async function handleCheckOut() {
 
@@ -338,7 +338,7 @@ async function handleCheckOut() {
     return;
   }
 
-  await loadAttendance();
+  await loadAttendance(selectedDate);
 
   alert("퇴근 등록 완료");
 }

@@ -81,6 +81,8 @@ LOGGED IN SCREEN
   type="date"
   value={selectedDate}
   onChange={(e) => {
+    alert("선택값 = " + e.target.value);
+    
     console.log("날짜 변경됨 =", e.target.value);
     setSelectedDate(e.target.value);
   }}

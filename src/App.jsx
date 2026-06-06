@@ -66,6 +66,38 @@ const filteredAttendance =
           item.employees?.department === selectedDepartment
       );
 
+const attendanceRate =
+  filteredEmployees.length > 0
+    ? (
+        (filteredAttendance.length /
+          filteredEmployees.length) *
+        100
+      ).toFixed(1)
+    : 0;
+
+const absentEmployees =
+  filteredEmployees.filter(
+    emp =>
+      !filteredAttendance.some(
+        att =>
+          att.employee_id === emp.employee_id
+      )
+  );
+    const absentEmployees =
+  filteredEmployees.filter(
+    emp =>
+      !filteredAttendance.some(
+        att =>
+          att.employee_id === emp.employee_id
+      )
+  );
+  selectedDepartment === "전체"
+    ? attendanceList
+    : attendanceList.filter(
+        item =>
+          item.employees?.department === selectedDepartment
+      );
+
   async function handleLogin() {
     const { data, error } = await supabase
       .from("employees")
@@ -222,6 +254,17 @@ setLoggedIn(true);
 미출근 인원 :
 {filteredEmployees.length - filteredAttendance.length}
 </h3>
+<h3>출근율 : {attendanceRate}%</h3>
+
+<h3>미출근자</h3>
+
+<ul>
+  {absentEmployees.map(emp => (
+    <li key={emp.employee_id}>
+      {emp.name}
+    </li>
+  ))}
+</ul>
 
           <h3>LIST COUNT : {filteredAttendance.length}</h3>
 

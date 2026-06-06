@@ -181,7 +181,19 @@ export default function App() {
             : "-"}
         </td>
 
-        <td>{item.status}</td>
+        <td
+  style={{
+    color:
+      item.status === "출근"
+        ? "green"
+        : item.status === "퇴근"
+        ? "gray"
+        : "black",
+    fontWeight: "bold",
+  }}
+>
+  {item.status}
+</td>
       </tr>
     ))}
   </tbody>

@@ -111,41 +111,64 @@ export default function App() {
             로그아웃
           </button>
           {userRole === "admin" && (
-            <>
-              <h3>직원 등록</h3>
+  <>
+    <button
+      className="login-btn"
+      onClick={() =>
+        setShowEmployeeForm(!showEmployeeForm)
+      }
+    >
+      {showEmployeeForm
+        ? "직원 등록 닫기"
+        : "직원 등록 열기"}
+    </button>
 
-              <input
-                placeholder="사번"
-                value={newEmployeeId}
-                onChange={(e) => setNewEmployeeId(e.target.value)}
-              />
+    {showEmployeeForm && (
+      <>
+        <h3>직원 등록</h3>
 
-              <input
-                placeholder="이름"
-                value={newEmployeeName}
-                onChange={(e) => setNewEmployeeName(e.target.value)}
-              />
+        <input
+          placeholder="사번"
+          value={newEmployeeId}
+          onChange={(e) =>
+            setNewEmployeeId(e.target.value)
+          }
+        />
 
-              <input
-                placeholder="비밀번호"
-                value={newEmployeePassword}
-                onChange={(e) => setNewEmployeePassword(e.target.value)}
-              />
+        <input
+          placeholder="이름"
+          value={newEmployeeName}
+          onChange={(e) =>
+            setNewEmployeeName(e.target.value)
+          }
+        />
 
-              <input
-                placeholder="부서"
-                value={newEmployeeDepartment}
-                onChange={(e) => setNewEmployeeDepartment(e.target.value)}
-              />
+        <input
+          placeholder="비밀번호"
+          value={newEmployeePassword}
+          onChange={(e) =>
+            setNewEmployeePassword(e.target.value)
+          }
+        />
 
-              <button
-                className="login-btn"
-                onClick={handleCreateEmployee}
-              >
-                직원 등록
-              </button>
-            </>
-          )}
+        <input
+          placeholder="부서"
+          value={newEmployeeDepartment}
+          onChange={(e) =>
+            setNewEmployeeDepartment(e.target.value)
+          }
+        />
+
+        <button
+          className="login-btn"
+          onClick={handleCreateEmployee}
+        >
+          직원 등록
+        </button>
+      </>
+    )}
+  </>
+)}
 
           <h3>{selectedDate} 근태 현황</h3>
           

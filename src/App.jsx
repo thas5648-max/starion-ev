@@ -23,7 +23,8 @@ console.log("DEVICE TOKEN =", deviceToken);
   const [attendanceList, setAttendanceList] = useState([]);
   const [employeeList, setEmployeeList] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("전체");
-  const lateTime = "07:30:00";
+  const dayShiftLateTime = "07:30:00";
+const nightShiftLateTime = "19:30:00";
   const [newEmployeeId, setNewEmployeeId] = useState("");
   const [newEmployeeName, setNewEmployeeName] = useState("");
   const [newEmployeePassword, setNewEmployeePassword] = useState("");
@@ -108,13 +109,26 @@ const absentEmployees =
   );
 
   const lateEmployees =
-  filteredAttendance.filter(
-    item =>
-      item.check_in &&
+  filteredAttendance.filter(item => {
+
+    if (!item.check_in) return false;
+
+    const checkTime =
       new Date(item.check_in)
         .toLocaleTimeString("en-GB")
-        .slice(0, 8) > lateTime
-  );
+        .slice(0, 8);
+
+    const shift =
+      item.employees?.shift;
+
+    if (shift === "야간") {
+      return checkTime >
+        nightShiftLateTime;
+    }
+
+    return checkTime >
+      dayShiftLateTime;
+  });
 
   const departmentStats = [
   "인사",
@@ -659,23 +673,35 @@ setLoggedIn(true);
       item.status === "퇴근"
         ? "gray"
         : (
-            item.check_in &&
-            new Date(item.check_in)
-              .toLocaleTimeString("en-GB")
-              .slice(0, 8) > lateTime
-          )
+  item.employees?.shift === "야간"
+    ? new Date(item.check_in)
+        .toLocaleTimeString("en-GB")
+        .slice(0, 8) >
+      nightShiftLateTime
+    : new Date(item.check_in)
+        .toLocaleTimeString("en-GB")
+        .slice(0, 8) >
+      dayShiftLateTime
+)
         ? "red"
         : "green",
     fontWeight: "bold",
   }}
 >
   {
-    item.check_in &&
-    new Date(item.check_in)
-      .toLocaleTimeString("en-GB")
-      .slice(0, 8) > lateTime
-      ? "지각"
-      : item.status
+    (
+  item.employees?.shift === "야간"
+    ? new Date(item.check_in)
+        .toLocaleTimeString("en-GB")
+        .slice(0, 8) >
+      nightShiftLateTime
+    : new Date(item.check_in)
+        .toLocaleTimeString("en-GB")
+        .slice(0, 8) >
+      dayShiftLateTime
+)
+  ? "지각"
+  : item.status
   }
 </td>
       </tr>
@@ -812,7 +838,8 @@ setLoggedIn(true);
     *,
    employees (
   name,
-  department
+  department,
+  shift
 )
   `)
       .eq("attendance_date", date);

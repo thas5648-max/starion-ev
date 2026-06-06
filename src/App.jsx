@@ -114,6 +114,99 @@ setEmployeeList(employees || []);
 setLoggedIn(true);
   }
 
+  if (loggedIn && userRole === "employee") {
+
+  return (
+    <div className="container">
+      <div className="login-card">
+
+        <h1>{t.welcome}</h1>
+
+        <h2>{userName}</h2>
+
+        <input
+          type="date"
+          value={selectedDate}
+          onChange={(e) =>
+            setSelectedDate(e.target.value)
+          }
+        />
+
+        <button
+          className="action-btn checkin-btn"
+          onClick={handleCheckIn}
+        >
+          {t.attendance}
+        </button>
+
+        <button
+          className="action-btn checkout-btn"
+          onClick={handleCheckOut}
+        >
+          퇴근 등록
+        </button>
+
+        <button
+          className="action-btn logout-btn"
+          onClick={() => {
+            setLoggedIn(false);
+            setUserName("");
+            setUserRole("");
+            setCurrentEmployeeId("");
+          }}
+        >
+          로그아웃
+        </button>
+
+        <h3>내 출근 기록</h3>
+
+        <table className="attendance-table">
+          <thead>
+            <tr>
+              <th>날짜</th>
+              <th>출근</th>
+              <th>퇴근</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {attendanceList
+              .filter(
+                item =>
+                  item.employee_id ===
+                  currentEmployeeId
+              )
+              .map(item => (
+                <tr key={item.id}>
+                  <td>{item.attendance_date}</td>
+
+                  <td>
+                    {item.check_in
+                      ? new Date(
+                          item.check_in
+                        ).toLocaleTimeString()
+                      : "-"}
+                  </td>
+
+                  <td>
+                    {item.check_out
+                      ? new Date(
+                          item.check_out
+                        ).toLocaleTimeString()
+                      : "-"}
+                  </td>
+
+                  <td>{item.status}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  );
+}
   if (loggedIn) {
 
     return (

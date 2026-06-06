@@ -7,6 +7,16 @@ export default function App() {
   const [employeeId, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+
+  const deviceToken =
+  localStorage.getItem("device_token") ||
+  crypto.randomUUID();
+
+  localStorage.setItem(
+  "device_token",
+  deviceToken
+);
+
   const [userName, setUserName] = useState("");
   const [userRole, setUserRole] = useState("");
   const [currentEmployeeId, setCurrentEmployeeId] = useState("");
@@ -98,6 +108,35 @@ const absentEmployees =
       return;
     }
 
+    const { data: deviceData } = await supabase
+  .from("employee_devices")
+  .select("*")
+  .eq("employee_id", employeeId);
+
+  if (deviceData && deviceData.length > 0) {
+
+  const isMaster =
+    deviceData.some(
+      d => d.is_master === true
+    );
+
+  if (!isMaster) {
+
+    const registered =
+      deviceData.find(
+        d =>
+          d.device_token === deviceToken
+      );
+
+    if (!registered) {
+      alert(
+        "등록된 기기가 아닙니다."
+      );
+      return;
+    }
+  }
+}
+
     setUserRole(data.role);
 
     setUserName(data.name);
@@ -110,6 +149,31 @@ const { data: employees } = await supabase
   .eq("active", true);
 
 setEmployeeList(employees || []);
+
+if (
+  !deviceData ||
+  deviceData.length === 0
+) {
+
+  const registerDevice =
+    confirm(
+      "현재 기기를 등록하시겠습니까?"
+    );
+
+  if (!registerDevice) {
+    return;
+  }
+
+  await supabase
+    .from("employee_devices")
+    .insert([
+      {
+        employee_id: employeeId,
+        device_token: deviceToken,
+        is_master: false
+      }
+    ]);
+}
 
 setLoggedIn(true);
   }

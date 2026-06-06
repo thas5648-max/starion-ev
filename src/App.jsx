@@ -45,6 +45,8 @@ const [showLateList, setShowLateList] =
 
 const [showDepartmentStats, setShowDepartmentStats] =
   useState(false);
+const [showAttendanceTable, setShowAttendanceTable] =
+  useState(false);
 
   const text = {
     es: {
@@ -560,6 +562,19 @@ setLoggedIn(true);
   </ul>
 )}
 
+<h3
+  style={{ cursor: "pointer" }}
+  onClick={() =>
+    setShowAttendanceTable(
+      !showAttendanceTable
+    )
+  }
+>
+  근태기록 ({filteredAttendance.length}건)
+  {showAttendanceTable ? " ▲" : " ▼"}
+</h3>
+
+{showAttendanceTable && (
 <table className="attendance-table">
   <thead>
     <tr>
@@ -625,6 +640,7 @@ setLoggedIn(true);
     ))}
   </tbody>
 </table>
+)}
         </div>
       </div>
     );

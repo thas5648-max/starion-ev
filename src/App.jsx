@@ -43,6 +43,9 @@ const [showLateList, setShowLateList] =
   }
 }, [selectedDate, loggedIn]);
 
+const [showDepartmentStats, setShowDepartmentStats] =
+  useState(false);
+
   const text = {
     es: {
       title: "STARION EV",
@@ -484,7 +487,19 @@ setLoggedIn(true);
     setShowAbsentList(!showAbsentList)
   }
 >
-<h3>부서별 출근 현황</h3>
+<h3
+  style={{ cursor: "pointer" }}
+  onClick={() =>
+    setShowDepartmentStats(
+      !showDepartmentStats
+    )
+  }
+>
+  부서별 출근 현황 ({departmentStats.length})
+  {showDepartmentStats ? " ▲" : " ▼"}
+</h3>
+
+{showDepartmentStats && (
 
 <table className="attendance-table">
   <thead>
@@ -499,6 +514,7 @@ setLoggedIn(true);
   <tbody>
     {departmentStats.map(d => (
       <tr key={d.dept}>
+
         <td>{d.dept}</td>
 
         <td>{d.present}</td>
@@ -514,10 +530,13 @@ setLoggedIn(true);
             : 0}
           %
         </td>
+
       </tr>
     ))}
   </tbody>
 </table>
+
+)}
   미출근자 ({absentEmployees.length}명)
   {showAbsentList ? " ▲" : " ▼"}
 </h3>

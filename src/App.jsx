@@ -13,6 +13,7 @@ export default function App() {
   const [attendanceList, setAttendanceList] = useState([]);
   const [employeeList, setEmployeeList] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("전체");
+  const lateTime = "07:30:00";
   const [newEmployeeId, setNewEmployeeId] = useState("");
   const [newEmployeeName, setNewEmployeeName] = useState("");
   const [newEmployeePassword, setNewEmployeePassword] = useState("");
@@ -293,15 +294,27 @@ setLoggedIn(true);
         <td
   style={{
     color:
-      item.status === "출근"
-        ? "green"
-        : item.status === "퇴근"
+      item.status === "퇴근"
         ? "gray"
-        : "black",
+        : (
+            item.check_in &&
+            new Date(item.check_in)
+              .toLocaleTimeString("en-GB")
+              .slice(0, 8) > lateTime
+          )
+        ? "red"
+        : "green",
     fontWeight: "bold",
   }}
 >
-  {item.status}
+  {
+    item.check_in &&
+    new Date(item.check_in)
+      .toLocaleTimeString("en-GB")
+      .slice(0, 8) > lateTime
+      ? "지각"
+      : item.status
+  }
 </td>
       </tr>
     ))}

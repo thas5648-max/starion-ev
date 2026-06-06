@@ -142,3 +142,22 @@ input {
   font-size: 24px;
   font-weight: bold;
 }
+.starion-header {
+  background: #9b003f;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.starion-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.starion-header p {
+  margin-top: 8px;
+  font-size: 14px;
+}

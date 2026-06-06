@@ -54,3 +54,25 @@ input {
   border: none;
   cursor: pointer;
 }
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.attendance-table th,
+.attendance-table td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.attendance-table th {
+  background: #2f65d9;
+  color: white;
+}
+
+.attendance-table tr:nth-child(even) {
+  background: #f5f5f5;
+}

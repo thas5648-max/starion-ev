@@ -151,25 +151,41 @@ export default function App() {
           
           <h3>LIST COUNT : {attendanceList.length}</h3>
 
-<ul>
-  {attendanceList.map((item) => (
-    <li key={item.id}>
-      {item.employee_id}
-      {" | "}
-      {item.employees?.name || "-"}
-      {" | "}
-      {item.check_in
-        ? new Date(item.check_in).toLocaleTimeString()
-        : "-"}
-      {" | "}
-      {item.check_out
-        ? new Date(item.check_out).toLocaleTimeString()
-        : "-"}
-      {" | "}
-      {item.status}
-    </li>
-  ))}
-</ul>
+<table className="attendance-table">
+  <thead>
+    <tr>
+      <th>사번</th>
+      <th>이름</th>
+      <th>출근시간</th>
+      <th>퇴근시간</th>
+      <th>상태</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {attendanceList.map((item) => (
+      <tr key={item.id}>
+        <td>{item.employee_id}</td>
+
+        <td>{item.employees?.name || "-"}</td>
+
+        <td>
+          {item.check_in
+            ? new Date(item.check_in).toLocaleTimeString()
+            : "-"}
+        </td>
+
+        <td>
+          {item.check_out
+            ? new Date(item.check_out).toLocaleTimeString()
+            : "-"}
+        </td>
+
+        <td>{item.status}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
         </div>
       </div>
     );

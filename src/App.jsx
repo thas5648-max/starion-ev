@@ -111,14 +111,14 @@ const absentEmployees =
     const { data: deviceData } = await supabase
   .from("employee_devices")
   .select("*")
-  .eq("employee_id", employeeId);
 
   if (deviceData && deviceData.length > 0) {
 
-  const isMaster =
-    deviceData.some(
-      d => d.is_master === true
-    );
+ const isMaster =
+  deviceData.some(
+    d =>
+      d.is_master === true &&
+      d.device_token === deviceToken
 
   if (!isMaster) {
 

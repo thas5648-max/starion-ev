@@ -18,6 +18,7 @@ export default function App() {
   const [selectedDate, setSelectedDate] = useState(
     new Date().toISOString().split("T")[0]
   );
+  const [showEmployeeForm, setShowEmployeeForm] = useState(false);
 
   useEffect(() => {
   if (loggedIn) {

@@ -28,6 +28,9 @@ console.log("DEVICE TOKEN =", deviceToken);
   const [newEmployeeName, setNewEmployeeName] = useState("");
   const [newEmployeePassword, setNewEmployeePassword] = useState("");
   const [newEmployeeDepartment, setNewEmployeeDepartment] = useState("");
+  const [newEmployeeShift,
+setNewEmployeeShift] =
+useState("");
   const [selectedDate, setSelectedDate] = useState(
     new Date().toISOString().split("T")[0]
   );
@@ -429,21 +432,49 @@ setLoggedIn(true);
           }
         />
 
-        <input
-          placeholder="비밀번호"
-          value={newEmployeePassword}
-          onChange={(e) =>
-            setNewEmployeePassword(e.target.value)
-          }
-        />
+        <select
+  value={newEmployeeDepartment}
+  onChange={(e) =>
+    setNewEmployeeDepartment(
+      e.target.value
+    )
+  }
+>
+  <option value="">부서 선택</option>
 
-        <input
-          placeholder="부서"
-          value={newEmployeeDepartment}
-          onChange={(e) =>
-            setNewEmployeeDepartment(e.target.value)
-          }
-        />
+  <option value="인사">인사</option>
+  <option value="구매">구매</option>
+  <option value="영업">영업</option>
+  <option value="사출">사출</option>
+  <option value="조립">조립</option>
+  <option value="프레스">프레스</option>
+  <option value="전착">전착</option>
+  <option value="프레스조립">프레스조립</option>
+  <option value="증착도장">증착도장</option>
+</select>
+
+<select
+  value={newEmployeeShift}
+  onChange={(e) =>
+    setNewEmployeeShift(
+      e.target.value
+    )
+  }
+>
+  <option value="">
+    근무조 선택
+  </option>
+
+  <option value="주간">
+    주간
+  </option>
+
+  <option value="야간">
+    야간
+  </option>
+</select>
+
+
 
         <button
           className="login-btn"
@@ -817,6 +848,8 @@ setLoggedIn(true);
           password_hash: newEmployeePassword,
           name: newEmployeeName,
           department: newEmployeeDepartment,
+          shift:
+newEmployeeShift,
           role: "employee",
           active: true
         }
@@ -834,5 +867,6 @@ setLoggedIn(true);
     setNewEmployeeName("");
     setNewEmployeePassword("");
     setNewEmployeeDepartment("");
+    setNewEmployeeShift("");
   }
 }

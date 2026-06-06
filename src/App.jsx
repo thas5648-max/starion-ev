@@ -32,7 +32,11 @@ console.log("DEVICE TOKEN =", deviceToken);
     new Date().toISOString().split("T")[0]
   );
   const [showEmployeeForm, setShowEmployeeForm] = useState(false);
+const [showAbsentList, setShowAbsentList] =
+  useState(false);
 
+const [showLateList, setShowLateList] =
+  useState(false);
   useEffect(() => {
   if (loggedIn) {
     loadAttendance(selectedDate);
@@ -444,25 +448,45 @@ setLoggedIn(true);
 
 </div>
 
-<h3>미출근자</h3>
+<h3
+  style={{ cursor: "pointer" }}
+  onClick={() =>
+    setShowAbsentList(!showAbsentList)
+  }
+>
+  미출근자 ({absentEmployees.length}명)
+  {showAbsentList ? " ▲" : " ▼"}
+</h3>
 
-<ul>
-  {absentEmployees.map(emp => (
-    <li key={emp.employee_id}>
-      {emp.name}
-    </li>
-  ))}
-</ul>
+{showAbsentList && (
+  <ul>
+    {absentEmployees.map(emp => (
+      <li key={emp.employee_id}>
+        {emp.name}
+      </li>
+    ))}
+  </ul>
+)}
 
-<h3>지각자</h3>
+<h3
+  style={{ cursor: "pointer" }}
+  onClick={() =>
+    setShowLateList(!showLateList)
+  }
+>
+  지각자 ({lateEmployees.length}명)
+  {showLateList ? " ▲" : " ▼"}
+</h3>
 
-<ul>
-  {lateEmployees.map(item => (
-    <li key={item.id}>
-      {item.employees?.name}
-    </li>
-  ))}
-</ul>
+{showLateList && (
+  <ul>
+    {lateEmployees.map(item => (
+      <li key={item.id}>
+        {item.employees?.name}
+      </li>
+    ))}
+  </ul>
+)}
 
           <h3>LIST COUNT : {filteredAttendance.length}</h3>
 

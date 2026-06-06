@@ -83,20 +83,6 @@ const absentEmployees =
           att.employee_id === emp.employee_id
       )
   );
-    const absentEmployees =
-  filteredEmployees.filter(
-    emp =>
-      !filteredAttendance.some(
-        att =>
-          att.employee_id === emp.employee_id
-      )
-  );
-  selectedDepartment === "전체"
-    ? attendanceList
-    : attendanceList.filter(
-        item =>
-          item.employees?.department === selectedDepartment
-      );
 
   async function handleLogin() {
     const { data, error } = await supabase

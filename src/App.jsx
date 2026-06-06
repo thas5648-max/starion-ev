@@ -138,12 +138,26 @@ const absentEmployees =
           d.device_token === deviceToken
       );
 
-    if (!registered) {
-      alert(
-        "등록된 기기가 아닙니다."
-      );
-      return;
-    }
+   if (!registered) {
+
+  const registerDevice = confirm(
+    "등록되지 않은 기기입니다.\n현재 기기를 등록하시겠습니까?"
+  );
+
+  if (!registerDevice) {
+    return;
+  }
+
+  await supabase
+    .from("employee_devices")
+    .insert([
+      {
+        employee_id: employeeId,
+        device_token: deviceToken,
+        is_master: false
+      }
+    ]);
+}
   }
 }
 

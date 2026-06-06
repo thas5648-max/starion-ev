@@ -167,18 +167,8 @@ setLoggedIn(true);
   </button>
 
 </div>
-          {userRole === "admin" && (
+          {userRole === "admin" && showEmployeeForm && (
   <>
-    <button
-      className="login-btn"
-      onClick={() =>
-        setShowEmployeeForm(!showEmployeeForm)
-      }
-    >
-      {showEmployeeForm
-        ? "직원 등록 닫기"
-        : "직원 등록 열기"}
-    </button>
 
     {showEmployeeForm && (
       <>

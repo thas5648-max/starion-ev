@@ -76,3 +76,40 @@ input {
 .attendance-table tr:nth-child(even) {
   background: #f5f5f5;
 }
+.action-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.checkin-btn {
+  background: #16a34a;
+}
+
+.checkout-btn {
+  background: #2563eb;
+}
+
+.bottom-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.bottom-buttons button {
+  flex: 1;
+}
+
+.employee-btn {
+  background: #6b7280;
+}
+
+.logout-btn {
+  background: #dc2626;
+}

@@ -19,9 +19,11 @@ export default function App() {
     new Date().toISOString().split("T")[0]
   );
 
-useEffect(() => {
+  useEffect(() => {
+  if (loggedIn) {
     loadAttendance(selectedDate);
-}, [selectedDate]);
+  }
+}, [selectedDate, loggedIn]);
 
   const text = {
     es: {
@@ -59,21 +61,13 @@ useEffect(() => {
       return;
     }
 
-   setUserRole(data.role);
+    setUserRole(data.role);
 
-alert("BEFORE LOAD");
+    setUserName(data.name);
+    setCurrentEmployeeId(data.employee_id);
+    setUserRole(data.role);
 
-await loadAttendance(selectedDate);
-
-alert("AFTER LOAD");
-
-return;
-
-alert("BEFORE LOGIN");
-
-setLoggedIn(true);
-
-alert("AFTER LOGIN");
+    setLoggedIn(true);
   }
 
   if (loggedIn) {
@@ -140,7 +134,7 @@ alert("AFTER LOGIN");
 
               <input
                 placeholder="비밀번호"
-                value={newEmployeePassword}Z
+                value={newEmployeePassword}
                 onChange={(e) => setNewEmployeePassword(e.target.value)}
               />
 
@@ -301,9 +295,6 @@ alert("AFTER LOGIN");
 
   async function loadAttendance(date) {
 
-    alert("selectedDate = " + selectedDate);
-    alert("date = " + date);
-
     console.log("loadAttendance 날짜 =", selectedDate);
     const { data, error } = await supabase
       .from("attendance")
@@ -319,70 +310,63 @@ alert("AFTER LOGIN");
       return;
     }
     console.log("선택 날짜 =", selectedDate);
-console.log("date parameter =", date);
-console.log(JSON.stringify(data, null, 2));
+    console.log("date parameter =", date);
+    console.log(JSON.stringify(data, null, 2));
 
-alert("LOAD END");
+    setAttendanceList(data);
 
-setAttendanceList(data);
-alert("SET START");
-setAttendanceList(data);
-alert("SET END");
+  }
 
 
+  async function handleCheckOut() {
 
-   
+    const today = new Date().toISOString().split("T")[0];
 
-    async function handleCheckOut() {
+    const { error } = await supabase
+      .from("attendance")
+      .update({
+        check_out: new Date().toISOString(),
+        status: "퇴근"
+      })
+      .eq("employee_id", currentEmployeeId)
+      .eq("attendance_date", today);
 
-      const today = new Date().toISOString().split("T")[0];
-
-      const { error } = await supabase
-        .from("attendance")
-        .update({
-          check_out: new Date().toISOString(),
-          status: "퇴근"
-        })
-        .eq("employee_id", currentEmployeeId)
-        .eq("attendance_date", today);
-
-      if (error) {
-        console.log(error);
-        alert("퇴근 등록 실패");
-        return;
-      }
-
-      await loadAttendance(selectedDate);
-
-      alert("퇴근 등록 완료");
+    if (error) {
+      console.log(error);
+      alert("퇴근 등록 실패");
+      return;
     }
-    async function handleCreateEmployee() {
 
-      const { error } = await supabase
-        .from("employees")
-        .insert([
-          {
-            employee_id: newEmployeeId,
-            password_hash: newEmployeePassword,
-            name: newEmployeeName,
-            department: newEmployeeDepartment,
-            role: "employee",
-            active: true
-          }
-        ]);
+    await loadAttendance(selectedDate);
 
-      if (error) {
-        console.log(error);
-        alert("직원 등록 실패");
-        return;
-      }
+    alert("퇴근 등록 완료");
+  }
+  async function handleCreateEmployee() {
 
-      alert("직원 등록 완료");
+    const { error } = await supabase
+      .from("employees")
+      .insert([
+        {
+          employee_id: newEmployeeId,
+          password_hash: newEmployeePassword,
+          name: newEmployeeName,
+          department: newEmployeeDepartment,
+          role: "employee",
+          active: true
+        }
+      ]);
 
-      setNewEmployeeId("");
-      setNewEmployeeName("");
-      setNewEmployeePassword("");
-      setNewEmployeeDepartment("");
+    if (error) {
+      console.log(error);
+      alert("직원 등록 실패");
+      return;
     }
+
+    alert("직원 등록 완료");
+
+    setNewEmployeeId("");
+    setNewEmployeeName("");
+    setNewEmployeePassword("");
+    setNewEmployeeDepartment("");
   }
 }

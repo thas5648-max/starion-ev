@@ -95,6 +95,15 @@ const absentEmployees =
       )
   );
 
+  const lateEmployees =
+  filteredAttendance.filter(
+    item =>
+      item.check_in &&
+      new Date(item.check_in)
+        .toLocaleTimeString("en-GB")
+        .slice(0, 8) > lateTime
+  );
+  
   async function handleLogin() {
     const { data, error } = await supabase
       .from("employees")
@@ -119,7 +128,8 @@ const absentEmployees =
     d =>
       d.is_master === true &&
       d.device_token === deviceToken
-
+  );
+  
   if (!isMaster) {
 
     const registered =

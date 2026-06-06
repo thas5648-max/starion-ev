@@ -12,6 +12,7 @@ export default function App() {
   const [currentEmployeeId, setCurrentEmployeeId] = useState("");
   const [attendanceList, setAttendanceList] = useState([]);
   const [employeeList, setEmployeeList] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState("전체");
   const [newEmployeeId, setNewEmployeeId] = useState("");
   const [newEmployeeName, setNewEmployeeName] = useState("");
   const [newEmployeePassword, setNewEmployeePassword] = useState("");
@@ -49,6 +50,21 @@ export default function App() {
   };
 
   const t = text[language];
+
+  const filteredEmployees =
+  selectedDepartment === "전체"
+    ? employeeList
+    : employeeList.filter(
+        emp => emp.department === selectedDepartment
+      );
+
+const filteredAttendance =
+  selectedDepartment === "전체"
+    ? attendanceList
+    : attendanceList.filter(
+        item =>
+          item.employees?.department === selectedDepartment
+      );
 
   async function handleLogin() {
     const { data, error } = await supabase
@@ -179,18 +195,35 @@ setLoggedIn(true);
   </>
 )}
 
+<select
+  value={selectedDepartment}
+  onChange={(e) =>
+    setSelectedDepartment(e.target.value)
+  }
+>
+  <option value="전체">전체</option>
+  <option value="인사">인사</option>
+  <option value="구매">구매</option>
+  <option value="영업">영업</option>
+  <option value="사출">사출</option>
+  <option value="조립">조립</option>
+  <option value="프레스">프레스</option>
+  <option value="전착">전착</option>
+  <option value="프레스조립">프레스조립</option>
+  <option value="증착도장">증착도장</option>
+</select>
           <h3>{selectedDate} 근태 현황</h3>
 
-          <h3>전체 인원 : {employeeList.length}</h3>
+          <h3>전체 인원 : {filteredEmployees.length}</h3>
 
-<h3>출근 인원 : {attendanceList.length}</h3>
+<h3>출근 인원 : {filteredAttendance.length}</h3>
 
 <h3>
 미출근 인원 :
-{employeeList.length - attendanceList.length}
+{filteredEmployees.length - filteredAttendance.length}
 </h3>
 
-          <h3>LIST COUNT : {attendanceList.length}</h3>
+          <h3>LIST COUNT : {filteredAttendance.length}</h3>
 
 <table className="attendance-table">
   <thead>
@@ -204,7 +237,13 @@ setLoggedIn(true);
   </thead>
 
   <tbody>
-    {attendanceList.map((item) => (
+    {attendanceList
+  .filter((item) =>
+    selectedDepartment === "전체"
+      ? true
+      : item.employees?.department === selectedDepartment
+  )
+  .map((item) => (
       <tr key={item.id}>
         <td>{item.employee_id}</td>
 
@@ -366,9 +405,10 @@ setLoggedIn(true);
       .from("attendance")
       .select(`
     *,
-    employees (
-      name
-    )
+   employees (
+  name,
+  department
+)
   `)
       .eq("attendance_date", date);
     if (error) {

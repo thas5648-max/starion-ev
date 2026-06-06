@@ -473,6 +473,9 @@ setLoggedIn(true);
     야간
   </option>
 </select>
+
+</div>
+
 <input
   type="password"
   placeholder="비밀번호"
@@ -483,8 +486,6 @@ setLoggedIn(true);
     )
   }
 />
-</div>
-
 
         <button
           className="login-btn"

@@ -236,15 +236,32 @@ setLoggedIn(true);
 </select>
           <h3>{selectedDate} 근태 현황</h3>
 
-          <h3>전체 인원 : {filteredEmployees.length}</h3>
+          <div className="summary-grid">
 
-<h3>출근 인원 : {filteredAttendance.length}</h3>
+  <div className="summary-card">
+    <h4>전체 인원</h4>
+    <p>{filteredEmployees.length}</p>
+  </div>
 
-<h3>
-미출근 인원 :
-{filteredEmployees.length - filteredAttendance.length}
-</h3>
-<h3>출근율 : {attendanceRate}%</h3>
+  <div className="summary-card">
+    <h4>출근 인원</h4>
+    <p>{filteredAttendance.length}</p>
+  </div>
+
+  <div className="summary-card">
+    <h4>미출근 인원</h4>
+    <p>
+      {filteredEmployees.length -
+        filteredAttendance.length}
+    </p>
+  </div>
+
+  <div className="summary-card">
+    <h4>출근율</h4>
+    <p>{attendanceRate}%</p>
+  </div>
+
+</div>
 
 <h3>미출근자</h3>
 

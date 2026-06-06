@@ -473,6 +473,16 @@ setLoggedIn(true);
     야간
   </option>
 </select>
+<input
+  type="password"
+  placeholder="비밀번호"
+  value={newEmployeePassword}
+  onChange={(e) =>
+    setNewEmployeePassword(
+      e.target.value
+    )
+  }
+/>
 </div>
 
 

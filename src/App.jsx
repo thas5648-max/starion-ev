@@ -83,13 +83,7 @@ export default function App() {
             type="date"
             value={selectedDate}
             onChange={(e) => {
-              alert("NEW DATE = " + e.target.value);
 
-              setSelectedDate(e.target.value);
-
-              setTimeout(() => {
-                alert("STATE AFTER = " + selectedDate);
-              }, 100);
             }}
           />
 
@@ -154,12 +148,7 @@ export default function App() {
           )}
 
           <h3>{selectedDate} 근태 현황</h3>
-          <h4 style={{ color: "red" }}>
-            STATE = {selectedDate}
-          </h4>
-          <h3 style={{ color: "red" }}>
-            REAL BLOCK
-          </h3>
+          
           <h3>LIST COUNT : {attendanceList.length}</h3>
 
 <ul>
@@ -229,7 +218,6 @@ export default function App() {
 
   async function handleCheckIn() {
 
-    console.log("출근버튼 클릭");
     const position = await new Promise((resolve, reject) => {
 
       navigator.geolocation.getCurrentPosition(
@@ -255,7 +243,6 @@ export default function App() {
       Math.pow(currentLat - company.latitude, 2) +
       Math.pow(currentLng - company.longitude, 2)
     ) * 111000;
-    console.log("현재거리(m):", Math.round(distance));
 
     alert(`현재거리 : ${Math.round(distance)}m`);
 
@@ -293,8 +280,6 @@ export default function App() {
       ])
       .select();
 
-    console.log("data:", data);
-    console.log("error:", error);
 
     if (error) {
       alert("출근 등록 실패");
@@ -308,7 +293,6 @@ export default function App() {
 
   async function loadAttendance(date) {
 
-    console.log("loadAttendance 날짜 =", selectedDate);
     const { data, error } = await supabase
       .from("attendance")
       .select(`
@@ -322,9 +306,6 @@ export default function App() {
       console.log(error);
       return;
     }
-    console.log("선택 날짜 =", selectedDate);
-    console.log("date parameter =", date);
-    console.log(JSON.stringify(data, null, 2));
 
     setAttendanceList(data);
 

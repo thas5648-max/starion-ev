@@ -103,7 +103,7 @@ const absentEmployees =
         .toLocaleTimeString("en-GB")
         .slice(0, 8) > lateTime
   );
-  
+
   async function handleLogin() {
     const { data, error } = await supabase
       .from("employees")
@@ -436,6 +436,16 @@ setLoggedIn(true);
   {absentEmployees.map(emp => (
     <li key={emp.employee_id}>
       {emp.name}
+    </li>
+  ))}
+</ul>
+
+<h3>지각자</h3>
+
+<ul>
+  {lateEmployees.map(item => (
+    <li key={item.id}>
+      {item.employees?.name}
     </li>
   ))}
 </ul>

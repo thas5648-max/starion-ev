@@ -11,7 +11,7 @@ export default function App() {
   const deviceToken =
   localStorage.getItem("device_token") ||
   crypto.randomUUID();
-
+console.log("DEVICE TOKEN =", deviceToken);
   localStorage.setItem(
   "device_token",
   deviceToken

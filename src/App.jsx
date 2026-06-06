@@ -132,28 +132,41 @@ setLoggedIn(true);
           />
 
           <button
-            className="login-btn"
-            onClick={handleCheckIn}
-          >
+  className="action-btn checkin-btn"
+  onClick={handleCheckIn}
+>
             {t.attendance}
           </button>
           <button
-            className="login-btn"
-            onClick={handleCheckOut}
-          >
+  className="action-btn checkout-btn"
+  onClick={handleCheckOut}
+>
             퇴근 등록
           </button>
-          <button
-            className="login-btn"
-            onClick={() => {
-              setLoggedIn(false);
-              setUserName("");
-              setUserRole("");
-              setCurrentEmployeeId("");
-            }}
-          >
-            로그아웃
-          </button>
+          <div className="bottom-buttons">
+
+  <button
+    className="action-btn employee-btn"
+    onClick={() =>
+      setShowEmployeeForm(!showEmployeeForm)
+    }
+  >
+    직원 등록 열기
+  </button>
+
+  <button
+    className="action-btn logout-btn"
+    onClick={() => {
+      setLoggedIn(false);
+      setUserName("");
+      setUserRole("");
+      setCurrentEmployeeId("");
+    }}
+  >
+    로그아웃
+  </button>
+
+</div>
           {userRole === "admin" && (
   <>
     <button

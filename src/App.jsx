@@ -82,9 +82,9 @@ export default function App() {
           <input
             type="date"
             value={selectedDate}
-            onChange={(e) => {
-
-            }}
+             onChange={(e) => {
+    setSelectedDate(e.target.value);
+  }}
           />
 
           <button

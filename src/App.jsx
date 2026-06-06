@@ -11,6 +11,7 @@ export default function App() {
   const [userRole, setUserRole] = useState("");
   const [currentEmployeeId, setCurrentEmployeeId] = useState("");
   const [attendanceList, setAttendanceList] = useState([]);
+  const [employeeList, setEmployeeList] = useState([]);
   const [newEmployeeId, setNewEmployeeId] = useState("");
   const [newEmployeeName, setNewEmployeeName] = useState("");
   const [newEmployeePassword, setNewEmployeePassword] = useState("");
@@ -68,7 +69,14 @@ export default function App() {
     setCurrentEmployeeId(data.employee_id);
     setUserRole(data.role);
 
-    setLoggedIn(true);
+const { data: employees } = await supabase
+  .from("employees")
+  .select("*")
+  .eq("active", true);
+
+setEmployeeList(employees || []);
+
+setLoggedIn(true);
   }
 
   if (loggedIn) {
@@ -172,7 +180,16 @@ export default function App() {
 )}
 
           <h3>{selectedDate} 근태 현황</h3>
-          
+
+          <h3>전체 인원 : {employeeList.length}</h3>
+
+<h3>출근 인원 : {attendanceList.length}</h3>
+
+<h3>
+미출근 인원 :
+{employeeList.length - attendanceList.length}
+</h3>
+
           <h3>LIST COUNT : {attendanceList.length}</h3>
 
 <table className="attendance-table">

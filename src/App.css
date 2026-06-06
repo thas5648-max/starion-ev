@@ -162,3 +162,13 @@ input {
   margin-top: 8px;
   font-size: 14px;
 }
+.employee-selects {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.employee-selects select {
+  flex: 1;
+  padding: 12px;
+}

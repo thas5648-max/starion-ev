@@ -432,6 +432,7 @@ setLoggedIn(true);
           }
         />
 
+<div className="employee-selects">
         <select
   value={newEmployeeDepartment}
   onChange={(e) =>
@@ -452,7 +453,6 @@ setLoggedIn(true);
   <option value="프레스조립">프레스조립</option>
   <option value="증착도장">증착도장</option>
 </select>
-
 <select
   value={newEmployeeShift}
   onChange={(e) =>
@@ -473,7 +473,7 @@ setLoggedIn(true);
     야간
   </option>
 </select>
-
+</div>
 
 
         <button

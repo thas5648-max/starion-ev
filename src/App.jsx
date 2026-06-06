@@ -108,6 +108,36 @@ const absentEmployees =
         .slice(0, 8) > lateTime
   );
 
+  const departmentStats = [
+  "인사",
+  "구매",
+  "영업",
+  "사출",
+  "조립",
+  "프레스",
+  "전착",
+  "프레스조립",
+  "증착도장"
+].map(dept => {
+
+  const total =
+    employeeList.filter(
+      emp => emp.department === dept
+    ).length;
+
+  const present =
+    filteredAttendance.filter(
+      att =>
+        att.employees?.department === dept
+    ).length;
+
+  return {
+    dept,
+    total,
+    present
+  };
+});
+
   async function handleLogin() {
     const { data, error } = await supabase
       .from("employees")
@@ -454,6 +484,40 @@ setLoggedIn(true);
     setShowAbsentList(!showAbsentList)
   }
 >
+<h3>부서별 출근 현황</h3>
+
+<table className="attendance-table">
+  <thead>
+    <tr>
+      <th>부서</th>
+      <th>출근</th>
+      <th>전체</th>
+      <th>출근율</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {departmentStats.map(d => (
+      <tr key={d.dept}>
+        <td>{d.dept}</td>
+
+        <td>{d.present}</td>
+
+        <td>{d.total}</td>
+
+        <td>
+          {d.total > 0
+            ? (
+                (d.present / d.total) *
+                100
+              ).toFixed(1)
+            : 0}
+          %
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
   미출근자 ({absentEmployees.length}명)
   {showAbsentList ? " ▲" : " ▼"}
 </h3>

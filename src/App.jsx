@@ -439,11 +439,14 @@ setLoggedIn(true);
   }
   style={{
     width: "100%",
-    padding: "12px",
+    display: "block",
+    padding: "14px",
     marginBottom: "15px",
-    borderRadius: "8px",
-    border: "1px solid #ccc",
+    borderRadius: "10px",
+    border: "2px solid #9b003f",
     fontSize: "16px",
+    background: "white",
+    color: "black",
     boxSizing: "border-box"
   }}
 />

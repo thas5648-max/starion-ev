@@ -130,7 +130,16 @@ const absentEmployees =
       dayShiftLateTime;
   });
 
-  const departmentStats = [
+const normalEmployees =
+  filteredAttendance.filter(
+    item =>
+      !lateEmployees.some(
+        late =>
+          late.employee_id === item.employee_id
+      )
+  );
+
+const departmentStats = [
   "인사",
   "구매",
   "영업",
@@ -615,6 +624,11 @@ setLoggedIn(true);
     setShowAbsentList(!showAbsentList)
   }
 >
+  <h3>📋 오늘 출근 현황</h3>
+
+<p>🟢 정상출근 : {normalEmployees.length}명</p>
+<p>🔴 지각 : {lateEmployees.length}명</p>
+<p>⚫ 결근 : {absentEmployees.length}명</p>
   미출근자 ({absentEmployees.length}명)
   {showAbsentList ? " ▲" : " ▼"}
 </h3>

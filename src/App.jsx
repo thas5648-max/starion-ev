@@ -121,6 +121,15 @@ absent: "Ausentes",
 
 attendanceRecords: "Registros de asistencia",
 lateEmployees: "Llegadas tarde",
+
+logout: "Cerrar sesión",
+checkout: "Registrar salida",
+employeeRegister: "Registrar empleado",
+all: "Todos",
+persons: "personas",
+role: "Rol",
+absentList: "Ausentes",
+
     },
     ko: {
       title: "STARION EV",
@@ -162,6 +171,15 @@ absent: "결근",
 
 attendanceRecords: "근태기록",
 lateEmployees: "지각자",
+
+logout: "로그아웃",
+checkout: "퇴근 등록",
+employeeRegister: "직원 등록 열기",
+all: "전체",
+persons: "명",
+role: "권한",
+absentList: "미출근자",
+
     },
   };
 
@@ -454,7 +472,7 @@ setLoggedIn(true);
             setCurrentEmployeeId("");
           }}
         >
-          로그아웃
+          {t.logout}
         </button>
 
 {showMyInfo && (
@@ -718,7 +736,7 @@ setLoggedIn(true);
 {activeTab === "attendance" && (
 <>
 <h3>
-  ROLE: {userRole}
+  {t.role}: {userRole}
 </h3>
           <input
             type="date"
@@ -760,7 +778,7 @@ setLoggedIn(true);
       setCurrentEmployeeId("");
     }}
   >
-    로그아웃
+    {t.logout}
   </button>
 
 </div>
@@ -871,7 +889,7 @@ setLoggedIn(true);
   <option value="프레스조립">프레스조립</option>
   <option value="증착도장">증착도장</option>
 </select>
-          <h3>{selectedDate} 근태 현황</h3>
+          <h3> {selectedDate} {t.attendanceStatus}</h3>
 
           <div className="summary-grid">
 
@@ -918,10 +936,10 @@ setLoggedIn(true);
 <table className="attendance-table">
   <thead>
     <tr>
-      <th>부서</th>
-      <th>출근</th>
-      <th>전체</th>
-      <th>출근율</th>
+      <th>{t.departmentHeader}</th>
+<th>{t.presentHeader}</th>
+<th>{t.totalHeader}</th>
+<th>{t.attendanceRateHeader}</th>
     </tr>
   </thead>
 
@@ -954,17 +972,17 @@ setLoggedIn(true);
 
 <h3>🌞 {t.dayShiftStatus} </h3>
 
-<p>{t.total} : : {dayEmployees.length}명</p>
-<p>{t.present} : : {dayAttendance.length}명</p>
-<p>{t.absent} : {dayEmployees.length - dayAttendance.length}명</p>
+<p>{t.total} : : {dayEmployees.length}{t.persons}</p>
+<p>{t.present} : : {dayAttendance.length}{t.persons}</p>
+<p>{t.absent} : {dayEmployees.length - dayAttendance.length}{t.persons}</p>
 
 <hr />
 
 <h3>🌙 {t.nightShiftStatus}</h3>
 
-<p>{t.total} : : {nightEmployees.length}명</p>
-<p>{t.present} : : {nightAttendance.length}명</p>
-<p>{t.absent} : {nightEmployees.length - nightAttendance.length}명</p>
+<p>{t.total} : : {nightEmployees.length}{t.persons}</p>
+<p>{t.present} : : {nightAttendance.length}{t.persons}</p>
+<p>{t.absent} : {nightEmployees.length - nightAttendance.length}{t.persons}</p>
 
 <h3
   style={{ cursor: "pointer" }}
@@ -972,7 +990,7 @@ setLoggedIn(true);
     setShowAbsentList(!showAbsentList)
   }
 >
-  미출근자 ({absentEmployees.length}명)
+  {t.absentList} ({absentEmployees.length}{t.persons})
   {showAbsentList ? " ▲" : " ▼"}
 </h3>
 
@@ -992,7 +1010,7 @@ setLoggedIn(true);
     setShowLateList(!showLateList)
   }
 >
-  {t.lateEmployees} ({lateEmployees.length}명)
+  {t.lateEmployees} ({lateEmployees.length}{t.persons})
   {showLateList ? " ▲" : " ▼"}
 </h3>
 

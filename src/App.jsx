@@ -463,11 +463,17 @@ setLoggedIn(true);
   key={emp.employee_id}
   onClick={() => {
   setSelectedEmployee(emp);
+
   setEditDepartment(
     emp.department || ""
   );
+
   setEditShift(
     emp.shift || ""
+  );
+
+  setEditActive(
+    emp.active
   );
 }}
   style={{
@@ -527,6 +533,7 @@ setLoggedIn(true);
 
     <select
       value={editShift}
+      
       onChange={(e) =>
         setEditShift(
           e.target.value
@@ -552,7 +559,16 @@ setLoggedIn(true);
     >
       저장
     </button>
-
+<button
+  className="logout-btn"
+  onClick={() =>
+    handleRetireEmployee(
+      emp.employee_id
+    )
+  }
+>
+ 퇴사 처리
+  </button>
   </div>
 )}
   </div>
@@ -1126,6 +1142,7 @@ setLoggedIn(true);
     alert("퇴근 등록 완료");
   }
   async function handleUpdateEmployee(
+    
   employeeId
 ) {
 
@@ -1157,6 +1174,43 @@ setLoggedIn(true);
   setEmployeeList(data || []);
 
   alert("수정 완료");
+}
+async function handleRetireEmployee(
+  employeeId
+) {
+
+  const confirmRetire =
+    window.confirm(
+      "정말 퇴사 처리하시겠습니까?"
+    );
+
+  if (!confirmRetire) return;
+
+  const { error } =
+    await supabase
+      .from("employees")
+      .update({
+        active: false
+      })
+      .eq(
+        "employee_id",
+        employeeId
+      );
+
+  if (error) {
+    alert("퇴사 처리 실패");
+    return;
+  }
+
+  const { data } =
+    await supabase
+      .from("employees")
+      .select("*")
+      .eq("active", true);
+
+  setEmployeeList(data || []);
+
+  alert("퇴사 처리 완료");
 }
   async function handleCreateEmployee() {
 

@@ -730,19 +730,8 @@ setLoggedIn(true);
   }}
 >
   {
-    (
-  item.employees?.shift === "야간"
-    ? new Date(item.check_in)
-        .toLocaleTimeString("en-GB")
-        .slice(0, 8) >
-      nightShiftLateTime
-    : new Date(item.check_in)
-        .toLocaleTimeString("en-GB")
-        .slice(0, 8) >
-      dayShiftLateTime
-)
   item.status
-  }
+}
 </td>
       </tr>
     ))}
@@ -853,7 +842,7 @@ setLoggedIn(true);
         {
           employee_id: currentEmployeeId,
           attendance_date: today,
-          check_in: new Date().toISOString(),
+          check_in: new Date().toLocaleString("sv-SE"),
           status: "출근"
         }
       ])
@@ -900,7 +889,7 @@ setLoggedIn(true);
     const { error } = await supabase
       .from("attendance")
       .update({
-        check_out: new Date().toISOString(),
+        check_out: new Date().toLocaleString("sv-SE"),
         status: "퇴근"
       })
       .eq("employee_id", currentEmployeeId)

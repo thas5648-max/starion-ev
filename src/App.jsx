@@ -89,6 +89,38 @@ const [editShift,
       welcome: "Bienvenido",
       attendance: "Registrar asistencia",
       invalid: "Usuario o contraseña incorrectos",
+      changePassword: "Cambiar contraseña",
+currentPassword: "Contraseña actual",
+newPassword: "Nueva contraseña",
+confirmPassword: "Confirmar contraseña",
+
+myInfo: "Mi información",
+
+employeeManagement: "Administración de empleados",
+
+department: "Departamento",
+shift: "Turno",
+
+save: "Guardar",
+retire: "Dar de baja",
+attendanceStatus: "Estado de asistencia",
+
+allEmployees: "Total de empleados",
+presentEmployees: "Presentes",
+absentEmployees: "Ausentes",
+attendanceRate: "Porcentaje de asistencia",
+
+departmentAttendance: "Asistencia por departamento",
+
+dayShiftStatus: "Turno diurno",
+nightShiftStatus: "Turno nocturno",
+
+total: "Total",
+present: "Presentes",
+absent: "Ausentes",
+
+attendanceRecords: "Registros de asistencia",
+lateEmployees: "Llegadas tarde",
     },
     ko: {
       title: "STARION EV",
@@ -98,6 +130,38 @@ const [editShift,
       welcome: "환영합니다",
       attendance: "출근 등록",
       invalid: "사번 또는 비밀번호가 올바르지 않습니다",
+      changePassword: "비밀번호 변경",
+currentPassword: "현재 비밀번호",
+newPassword: "새 비밀번호",
+confirmPassword: "새 비밀번호 확인",
+
+myInfo: "내 정보",
+
+employeeManagement: "직원관리",
+
+department: "부서",
+shift: "근무조",
+
+save: "저장",
+retire: "퇴사 처리",
+attendanceStatus: "근태현황",
+
+allEmployees: "전체 인원",
+presentEmployees: "출근 인원",
+absentEmployees: "미출근 인원",
+attendanceRate: "출근율",
+
+departmentAttendance: "부서별 출근 현황",
+
+dayShiftStatus: "주간조 현황",
+nightShiftStatus: "야간조 현황",
+
+total: "전체",
+present: "출근",
+absent: "결근",
+
+attendanceRecords: "근태기록",
+lateEmployees: "지각자",
     },
   };
 
@@ -378,7 +442,7 @@ setLoggedIn(true);
     )
   }
 >
-  ⚙️ 내 정보
+  ⚙️ {t.myInfo}
 </button>
 
         <button
@@ -395,11 +459,11 @@ setLoggedIn(true);
 
 {showMyInfo && (
   <>
-    <h3>비밀번호 변경</h3>
+    <h3>{t.changePassword}</h3>
 
     <input
       type="password"
-      placeholder="현재 비밀번호"
+      placeholder={t.currentPassword}
       value={currentPassword}
       onChange={(e) =>
         setCurrentPassword(
@@ -410,7 +474,7 @@ setLoggedIn(true);
 
     <input
       type="password"
-      placeholder="새 비밀번호"
+      placeholder={t.newPassword}
       value={newPassword}
       onChange={(e) =>
         setNewPassword(
@@ -511,7 +575,7 @@ setLoggedIn(true);
 
 {activeTab === "employees" && (
   <>
-    <h2>👥 직원관리</h2>
+    <h2>👥 {t.employeeManagement}</h2>
    <input
   type="text"
   placeholder="🔍 이름 또는 사번 검색"
@@ -632,7 +696,7 @@ setLoggedIn(true);
         )
       }
     >
-      저장
+      {t.save}
     </button>
 <button
   className="logout-btn"
@@ -642,7 +706,7 @@ setLoggedIn(true);
     )
   }
 >
- 퇴사 처리
+ {t.retire}
   </button>
   </div>
 )}
@@ -812,17 +876,17 @@ setLoggedIn(true);
           <div className="summary-grid">
 
   <div className="summary-card">
-    <h4>전체 인원</h4>
+    <h4>{t.allEmployees}</h4>
     <p>{filteredEmployees.length}</p>
   </div>
 
   <div className="summary-card">
-    <h4>출근 인원</h4>
+    <h4>{t.presentEmployees}</h4>
     <p>{filteredAttendance.length}</p>
   </div>
 
   <div className="summary-card">
-    <h4>미출근 인원</h4>
+    <h4>{t.absentEmployees}</h4>
     <p>
       {filteredEmployees.length -
         filteredAttendance.length}
@@ -830,7 +894,7 @@ setLoggedIn(true);
   </div>
 
   <div className="summary-card">
-    <h4>출근율</h4>
+    <h4>{t.attendanceRate}</h4>
     <p>{attendanceRate}%</p>
   </div>
 
@@ -844,7 +908,8 @@ setLoggedIn(true);
     )
   }
 >
-  부서별 출근 현황 ({departmentStats.length})
+  {t.departmentAttendance}
+({departmentStats.length})
   {showDepartmentStats ? " ▲" : " ▼"}
 </h3>
 
@@ -887,19 +952,19 @@ setLoggedIn(true);
 
 )}
 
-<h3>🌞 주간조 현황</h3>
+<h3>🌞 {t.dayShiftStatus} </h3>
 
-<p>전체 : {dayEmployees.length}명</p>
-<p>출근 : {dayAttendance.length}명</p>
-<p>결근 : {dayEmployees.length - dayAttendance.length}명</p>
+<p>{t.total} : : {dayEmployees.length}명</p>
+<p>{t.present} : : {dayAttendance.length}명</p>
+<p>{t.absent} : {dayEmployees.length - dayAttendance.length}명</p>
 
 <hr />
 
-<h3>🌙 야간조 현황</h3>
+<h3>🌙 {t.nightShiftStatus}</h3>
 
-<p>전체 : {nightEmployees.length}명</p>
-<p>출근 : {nightAttendance.length}명</p>
-<p>결근 : {nightEmployees.length - nightAttendance.length}명</p>
+<p>{t.total} : : {nightEmployees.length}명</p>
+<p>{t.present} : : {nightAttendance.length}명</p>
+<p>{t.absent} : {nightEmployees.length - nightAttendance.length}명</p>
 
 <h3
   style={{ cursor: "pointer" }}
@@ -927,7 +992,7 @@ setLoggedIn(true);
     setShowLateList(!showLateList)
   }
 >
-  지각자 ({lateEmployees.length}명)
+  {t.lateEmployees} ({lateEmployees.length}명)
   {showLateList ? " ▲" : " ▼"}
 </h3>
 
@@ -949,7 +1014,7 @@ setLoggedIn(true);
     )
   }
 >
-  근태기록 ({filteredAttendance.length}건)
+  {t.attendanceRecords} ({filteredAttendance.length}건)
   {showAttendanceTable ? " ▲" : " ▼"}
 </h3>
 

@@ -53,6 +53,9 @@ const [showAttendanceTable, setShowAttendanceTable] =
   useState(false);
 const [activeTab, setActiveTab] =
   useState("attendance");
+  const [selectedEmployee,
+  setSelectedEmployee] =
+  useState(null);
   const text = {
     es: {
       title: "STARION EV",
@@ -413,30 +416,69 @@ setLoggedIn(true);
     <h2>👥 직원관리</h2>
 
     {employeeList.map(emp => (
+  <div
+    key={emp.employee_id}
+    onClick={() =>
+      setSelectedEmployee(emp)
+    }
+    style={{
+      border: "1px solid #ddd",
+      padding: "10px",
+      marginBottom: "10px",
+      borderRadius: "8px"
+    }}
+  >
+    <b>{emp.employee_id}</b>
+
+    <br />
+
+    {emp.name}
+
+    <br />
+
+    {emp.department} / {emp.shift}
+  </div>
+))}
+    {selectedEmployee && (
       <div
-        key={emp.employee_id}
         style={{
-          border: "1px solid #ddd",
-          padding: "10px",
-          marginBottom: "10px",
+          border: "2px solid #9b003f",
+          padding: "12px",
+          marginTop: "15px",
           borderRadius: "8px"
         }}
       >
-        <b>{emp.employee_id}</b>
+        <h3>직원 정보</h3>
 
-        <br />
+        <p>
+          사번 :
+          {selectedEmployee.employee_id}
+        </p>
 
-        {emp.name}
+        <p>
+          이름 :
+          {selectedEmployee.name}
+        </p>
 
-        <br />
+        <p>Z
+          부서 :
+          {selectedEmployee.department}
+        </p>
 
-        {emp.department}
+        <p>
+          근무조 :
+          {selectedEmployee.shift}
+        </p>
 
-        {" / "}
-
-        {emp.shift}
+        <p>
+          상태 :
+          {selectedEmployee.active
+            ? "재직"
+            : "퇴사"}
+        </p>
       </div>
-    ))}
+    )}
+
   </>
 )}
 {activeTab === "attendance" && (

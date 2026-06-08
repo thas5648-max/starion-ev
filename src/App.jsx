@@ -129,6 +129,10 @@ all: "Todos",
 persons: "personas",
 role: "Rol",
 absentList: "Ausentes",
+departmentHeader: "Departamento",
+presentHeader: "Presentes",
+totalHeader: "Total",
+attendanceRateHeader: "% Asistencia",
 
     },
     ko: {
@@ -449,7 +453,7 @@ setLoggedIn(true);
           className="action-btn checkout-btn"
           onClick={handleCheckOut}
         >
-          퇴근 등록
+          {t.checkout}
         </button>
 
 <button
@@ -766,7 +770,7 @@ setLoggedIn(true);
       setShowEmployeeForm(!showEmployeeForm)
     }
   >
-    직원 등록 열기
+    {t.employeeRegister}
   </button>
 
   <button
@@ -878,16 +882,9 @@ setLoggedIn(true);
     setSelectedDepartment(e.target.value)
   }
 >
-  <option value="전체">전체</option>
-  <option value="인사">인사</option>
-  <option value="구매">구매</option>
-  <option value="영업">영업</option>
-  <option value="사출">사출</option>
-  <option value="조립">조립</option>
-  <option value="프레스">프레스</option>
-  <option value="전착">전착</option>
-  <option value="프레스조립">프레스조립</option>
-  <option value="증착도장">증착도장</option>
+ <option value="전체">
+  {t.all}
+</option>
 </select>
           <h3> {selectedDate} {t.attendanceStatus}</h3>
 

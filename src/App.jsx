@@ -20,6 +20,21 @@ console.log("DEVICE TOKEN =", deviceToken);
   const [userName, setUserName] = useState("");
   const [userRole, setUserRole] = useState("");
   const [currentEmployeeId, setCurrentEmployeeId] = useState("");
+  const [showMyInfo,
+  setShowMyInfo] =
+  useState(false);
+
+const [currentPassword,
+  setCurrentPassword] =
+  useState("");
+
+const [newPassword,
+  setNewPassword] =
+  useState("");
+
+const [confirmPassword,
+  setConfirmPassword] =
+  useState("");
   const [attendanceList, setAttendanceList] = useState([]);
   const [employeeList, setEmployeeList] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("전체");
@@ -355,6 +370,17 @@ setLoggedIn(true);
           퇴근 등록
         </button>
 
+<button
+  className="action-btn employee-btn"
+  onClick={() =>
+    setShowMyInfo(
+      !showMyInfo
+    )
+  }
+>
+  ⚙️ 내 정보
+</button>
+
         <button
           className="action-btn logout-btn"
           onClick={() => {
@@ -366,6 +392,55 @@ setLoggedIn(true);
         >
           로그아웃
         </button>
+
+{showMyInfo && (
+  <>
+    <h3>비밀번호 변경</h3>
+
+    <input
+      type="password"
+      placeholder="현재 비밀번호"
+      value={currentPassword}
+      onChange={(e) =>
+        setCurrentPassword(
+          e.target.value
+        )
+      }
+    />
+
+    <input
+      type="password"
+      placeholder="새 비밀번호"
+      value={newPassword}
+      onChange={(e) =>
+        setNewPassword(
+          e.target.value
+        )
+      }
+    />
+
+    <input
+      type="password"
+      placeholder="새 비밀번호 확인"
+      value={confirmPassword}
+      onChange={(e) =>
+        setConfirmPassword(
+          e.target.value
+        )
+      }
+    />
+
+    <button
+      className="login-btn"
+      onClick={
+        handleChangePassword
+      }
+    >
+      비밀번호 변경
+    </button>
+  </>
+)}
+
 
         <h3>내 출근 기록</h3>
 
@@ -1212,6 +1287,67 @@ async function handleRetireEmployee(
 
   alert("퇴사 처리 완료");
 }
+
+async function handleChangePassword() {
+
+  if (
+    newPassword !==
+    confirmPassword
+  ) {
+    alert(
+      "새 비밀번호가 일치하지 않습니다."
+    );
+    return;
+  }
+
+  const { data } =
+    await supabase
+      .from("employees")
+      .select("*")
+      .eq(
+        "employee_id",
+        currentEmployeeId
+      )
+      .single();
+
+  if (
+    data.password_hash !==
+    currentPassword
+  ) {
+    alert(
+      "현재 비밀번호가 틀렸습니다."
+    );
+    return;
+  }
+
+  const { error } =
+    await supabase
+      .from("employees")
+      .update({
+        password_hash:
+          newPassword
+      })
+      .eq(
+        "employee_id",
+        currentEmployeeId
+      );
+
+  if (error) {
+    alert(
+      "비밀번호 변경 실패"
+    );
+    return;
+  }
+
+  alert(
+    "비밀번호 변경 완료"
+  );
+
+  setCurrentPassword("");
+  setNewPassword("");
+  setConfirmPassword("");
+}
+
   async function handleCreateEmployee() {
 
     const { error } = await supabase

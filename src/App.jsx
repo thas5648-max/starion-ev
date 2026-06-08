@@ -390,6 +390,7 @@ setLoggedIn(true);
     </div>
   );
 }
+
   if (loggedIn) {
 
     return (
@@ -407,6 +408,39 @@ setLoggedIn(true);
 
 <h2>{userName}</h2>
 
+{activeTab === "employees" && (
+  <>
+    <h2>👥 직원관리</h2>
+
+    {employeeList.map(emp => (
+      <div
+        key={emp.employee_id}
+        style={{
+          border: "1px solid #ddd",
+          padding: "10px",
+          marginBottom: "10px",
+          borderRadius: "8px"
+        }}
+      >
+        <b>{emp.employee_id}</b>
+
+        <br />
+
+        {emp.name}
+
+        <br />
+
+        {emp.department}
+
+        {" / "}
+
+        {emp.shift}
+      </div>
+    ))}
+  </>
+)}
+{activeTab === "attendance" && (
+<>
 <h3>
   ROLE: {userRole}
 </h3>
@@ -542,6 +576,7 @@ setLoggedIn(true);
     )}
   </>
 )}
+
 
 <select
   value={selectedDepartment}
@@ -783,11 +818,30 @@ setLoggedIn(true);
   </tbody>
 </table>
 )}
+</>
+)}
+<div className="bottom-nav">
+
+  <button
+    onClick={() =>
+      setActiveTab("attendance")
+    }
+  >
+    🏠 근태현황
+  </button>
+
+  <button
+    onClick={() =>
+      setActiveTab("employees")
+    }
+  >
+    👥 직원관리
+  </button>
+</div>
         </div>
       </div>
     );
   }
-
   return (
     <div className="container">
       <div className="login-card">

@@ -53,6 +53,8 @@ const [showAttendanceTable, setShowAttendanceTable] =
   useState(false);
 const [activeTab, setActiveTab] =
   useState("attendance");
+  const [searchText, setSearchText] =
+  useState("");
   const [selectedEmployee,
   setSelectedEmployee] =
   useState(null);
@@ -162,6 +164,20 @@ const nightAttendance =
   filteredAttendance.filter(
     item =>
       item.employees?.shift === "야간"
+  );
+
+  const filteredEmployeeList =
+  employeeList.filter(emp =>
+    emp.name
+      .toLowerCase()
+      .includes(
+        searchText.toLowerCase()
+      ) ||
+    emp.employee_id
+      .toLowerCase()
+      .includes(
+        searchText.toLowerCase()
+      )
   );
 
 const departmentStats = [
@@ -414,8 +430,16 @@ setLoggedIn(true);
 {activeTab === "employees" && (
   <>
     <h2>👥 직원관리</h2>
+    <input
+  type="text"
+  placeholder="직원 검색"
+  value={searchText}
+  onChange={(e) =>
+    setSearchText(e.target.value)
+  }
+/>
 
-    {employeeList.map(emp => (
+    {filteredEmployeeList.map(emp => (
   <div
     key={emp.employee_id}
     onClick={() =>
@@ -439,45 +463,6 @@ setLoggedIn(true);
     {emp.department} / {emp.shift}
   </div>
 ))}
-    {selectedEmployee && (
-      <div
-        style={{
-          border: "2px solid #9b003f",
-          padding: "12px",
-          marginTop: "15px",
-          borderRadius: "8px"
-        }}
-      >
-        <h3>직원 정보</h3>
-
-        <p>
-          사번 :
-          {selectedEmployee.employee_id}
-        </p>
-
-        <p>
-          이름 :
-          {selectedEmployee.name}
-        </p>
-
-        <p>Z
-          부서 :
-          {selectedEmployee.department}
-        </p>
-
-        <p>
-          근무조 :
-          {selectedEmployee.shift}
-        </p>
-
-        <p>
-          상태 :
-          {selectedEmployee.active
-            ? "재직"
-            : "퇴사"}
-        </p>
-      </div>
-    )}
 
   </>
 )}

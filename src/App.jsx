@@ -58,6 +58,13 @@ const [activeTab, setActiveTab] =
   const [selectedEmployee,
   setSelectedEmployee] =
   useState(null);
+  const [editDepartment,
+  setEditDepartment] =
+  useState("");
+
+const [editShift,
+  setEditShift] =
+  useState("");
   const text = {
     es: {
       title: "STARION EV",
@@ -454,9 +461,15 @@ setLoggedIn(true);
     {filteredEmployeeList.map(emp => (
   <div
   key={emp.employee_id}
-  onClick={() =>
-    setSelectedEmployee(emp)
-  }
+  onClick={() => {
+  setSelectedEmployee(emp);
+  setEditDepartment(
+    emp.department || ""
+  );
+  setEditShift(
+    emp.shift || ""
+  );
+}}
   style={{
     border:
       selectedEmployee?.employee_id === emp.employee_id
@@ -480,6 +493,68 @@ setLoggedIn(true);
     <br />
 
     {emp.department} / {emp.shift}
+    {selectedEmployee?.employee_id === emp.employee_id && (
+  <div
+    style={{
+      marginTop: "10px",
+      borderTop: "1px solid #ddd",
+      paddingTop: "10px"
+    }}
+  >
+
+    <p>부서</p>
+
+    <select
+      value={editDepartment}
+      onChange={(e) =>
+        setEditDepartment(
+          e.target.value
+        )
+      }
+    >
+      <option value="인사">인사</option>
+      <option value="구매">구매</option>
+      <option value="영업">영업</option>
+      <option value="사출">사출</option>
+      <option value="조립">조립</option>
+      <option value="프레스">프레스</option>
+      <option value="전착">전착</option>
+      <option value="프레스조립">프레스조립</option>
+      <option value="증착도장">증착도장</option>
+    </select>
+
+    <p>근무조</p>
+
+    <select
+      value={editShift}
+      onChange={(e) =>
+        setEditShift(
+          e.target.value
+        )
+      }
+    >
+      <option value="주간">
+        주간
+      </option>
+
+      <option value="야간">
+        야간
+      </option>
+    </select>
+
+    <button
+      className="login-btn"
+      onClick={() =>
+        handleUpdateEmployee(
+          emp.employee_id
+        )
+      }
+    >
+      저장
+    </button>
+
+  </div>
+)}
   </div>
 ))}
 
@@ -1050,6 +1125,39 @@ setLoggedIn(true);
 
     alert("퇴근 등록 완료");
   }
+  async function handleUpdateEmployee(
+  employeeId
+) {
+
+  const { error } =
+    await supabase
+      .from("employees")
+      .update({
+        department:
+          editDepartment,
+        shift:
+          editShift
+      })
+      .eq(
+        "employee_id",
+        employeeId
+      );
+
+  if (error) {
+    alert("수정 실패");
+    return;
+  }
+
+  const { data } =
+    await supabase
+      .from("employees")
+      .select("*")
+      .eq("active", true);
+
+  setEmployeeList(data || []);
+
+  alert("수정 완료");
+}
   async function handleCreateEmployee() {
 
     const { error } = await supabase

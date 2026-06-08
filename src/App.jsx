@@ -688,13 +688,23 @@ setLoggedIn(true);
 
         <td>
           {item.check_in
-            ? new Date(item.check_in).toLocaleTimeString()
+            ? new Date(item.check_in).toLocaleTimeString(
+  "ko-KR",
+  {
+    timeZone: "America/Monterrey"
+  }
+)
             : "-"}
         </td>
 
         <td>
           {item.check_out
-            ? new Date(item.check_out).toLocaleTimeString()
+            ? new Date(item.check_out).toLocaleTimeString(
+  "ko-KR",
+  {
+    timeZone: "America/Monterrey"
+  }
+)
             : "-"}
         </td>
 
@@ -731,8 +741,7 @@ setLoggedIn(true);
         .slice(0, 8) >
       dayShiftLateTime
 )
-  ? "지각"
-  : item.status
+  item.status
   }
 </td>
       </tr>

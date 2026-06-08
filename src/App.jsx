@@ -138,6 +138,27 @@ const normalEmployees =
           late.employee_id === item.employee_id
       )
   );
+  const dayEmployees =
+  filteredEmployees.filter(
+    emp => emp.shift === "주간"
+  );
+
+const nightEmployees =
+  filteredEmployees.filter(
+    emp => emp.shift === "야간"
+  );
+
+const dayAttendance =
+  filteredAttendance.filter(
+    item =>
+      item.employees?.shift === "주간"
+  );
+
+const nightAttendance =
+  filteredAttendance.filter(
+    item =>
+      item.employees?.shift === "야간"
+  );
 
 const departmentStats = [
   "인사",

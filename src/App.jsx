@@ -430,28 +430,44 @@ setLoggedIn(true);
 {activeTab === "employees" && (
   <>
     <h2>👥 직원관리</h2>
-    <input
+   <input
   type="text"
-  placeholder="직원 검색"
+  placeholder="🔍 이름 또는 사번 검색"
   value={searchText}
   onChange={(e) =>
     setSearchText(e.target.value)
   }
+  style={{
+    width: "100%",
+    padding: "12px",
+    marginBottom: "15px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+    fontSize: "16px",
+    boxSizing: "border-box"
+  }}
 />
 
     {filteredEmployeeList.map(emp => (
   <div
-    key={emp.employee_id}
-    onClick={() =>
-      setSelectedEmployee(emp)
-    }
-    style={{
-      border: "1px solid #ddd",
-      padding: "10px",
-      marginBottom: "10px",
-      borderRadius: "8px"
-    }}
-  >
+  key={emp.employee_id}
+  onClick={() =>
+    setSelectedEmployee(emp)
+  }
+  style={{
+    border:
+      selectedEmployee?.employee_id === emp.employee_id
+        ? "2px solid #9b003f"
+        : "1px solid #ddd",
+    padding: "10px",
+    marginBottom: "10px",
+    borderRadius: "8px",
+    background:
+      selectedEmployee?.employee_id === emp.employee_id
+        ? "#fff5f8"
+        : "white"
+  }}
+>
     <b>{emp.employee_id}</b>
 
     <br />

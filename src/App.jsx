@@ -51,7 +51,8 @@ const [showDepartmentStats, setShowDepartmentStats] =
   useState(false);
 const [showAttendanceTable, setShowAttendanceTable] =
   useState(false);
-
+const [activeTab, setActiveTab] =
+  useState("attendance");
   const text = {
     es: {
       title: "STARION EV",
@@ -639,41 +640,26 @@ setLoggedIn(true);
 
 )}
 
+<h3>🌞 주간조 현황</h3>
+
+<p>전체 : {dayEmployees.length}명</p>
+<p>출근 : {dayAttendance.length}명</p>
+<p>결근 : {dayEmployees.length - dayAttendance.length}명</p>
+
+<hr />
+
+<h3>🌙 야간조 현황</h3>
+
+<p>전체 : {nightEmployees.length}명</p>
+<p>출근 : {nightAttendance.length}명</p>
+<p>결근 : {nightEmployees.length - nightAttendance.length}명</p>
+
 <h3
   style={{ cursor: "pointer" }}
   onClick={() =>
     setShowAbsentList(!showAbsentList)
   }
 >
-  <h3>🌞 주간조 현황</h3>
-
-<p>
-전체 : {dayEmployees.length}명
-</p>
-
-<p>
-출근 : {dayAttendance.length}명
-</p>
-
-<p>
-결근 : {dayEmployees.length - dayAttendance.length}명
-</p>
-
-<hr />
-
-<h3>🌙 야간조 현황</h3>
-
-<p>
-전체 : {nightEmployees.length}명
-</p>
-
-<p>
-출근 : {nightAttendance.length}명
-</p>
-
-<p>
-결근 : {nightEmployees.length - nightAttendance.length}명
-</p>
   미출근자 ({absentEmployees.length}명)
   {showAbsentList ? " ▲" : " ▼"}
 </h3>

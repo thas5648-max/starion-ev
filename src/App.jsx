@@ -913,9 +913,24 @@ setLoggedIn(true);
   </>
 )}
 
-
+<div
+  style={{
+    marginTop: "10px",
+    marginBottom: "5px",
+    fontWeight: "bold"
+  }}
+>
+  📂 {t.department}
+</div>
 <select
   value={selectedDepartment}
+  style={{
+    width: "100%",
+    padding: "10px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+    marginBottom: "10px"
+  }}
   onChange={(e) =>
     setSelectedDepartment(e.target.value)
   }

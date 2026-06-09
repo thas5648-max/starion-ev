@@ -133,6 +133,10 @@ departmentHeader: "Departamento",
 presentHeader: "Presentes",
 totalHeader: "Total",
 attendanceRateHeader: "% Asistencia",
+employeeName: "Nombre",
+selectDepartment: "Seleccionar departamento",
+selectShift: "Seleccionar turno",
+myAttendance: "Mis registros",
 
     },
     ko: {
@@ -183,6 +187,10 @@ all: "전체",
 persons: "명",
 role: "권한",
 absentList: "미출근자",
+employeeName: "이름",
+selectDepartment: "부서 선택",
+selectShift: "근무조 선택",
+myAttendance: "내 출근 기록",
 
     },
   };
@@ -528,7 +536,7 @@ setLoggedIn(true);
 )}
 
 
-        <h3>내 출근 기록</h3>
+        <h3>{t.myAttendance}</h3>
 
         <table className="attendance-table">
           <thead>
@@ -791,10 +799,10 @@ setLoggedIn(true);
 
     {showEmployeeForm && (
       <>
-        <h3>직원 등록</h3>
+        <h3>{t.employeeRegister}</h3>
 
         <input
-          placeholder="사번"
+          placeholder={t.employeeId}
           value={newEmployeeId}
           onChange={(e) =>
             setNewEmployeeId(e.target.value)
@@ -802,7 +810,7 @@ setLoggedIn(true);
         />
 
         <input
-          placeholder="이름"
+          placeholder={t.name}
           value={newEmployeeName}
           onChange={(e) =>
             setNewEmployeeName(e.target.value)
@@ -818,7 +826,9 @@ setLoggedIn(true);
     )
   }
 >
-  <option value="">부서 선택</option>
+  <option value="">
+  {t.selectDepartment}
+</option>
 
   <option value="인사">인사</option>
   <option value="구매">구매</option>
@@ -839,8 +849,8 @@ setLoggedIn(true);
   }
 >
   <option value="">
-    근무조 선택
-  </option>
+  {t.selectShift}
+</option>
 
   <option value="주간">
     주간
@@ -855,7 +865,7 @@ setLoggedIn(true);
 
 <input
   type="password"
-  placeholder="비밀번호"
+  placeholder={t.password}
   value={newEmployeePassword}
   onChange={(e) =>
     setNewEmployeePassword(
@@ -868,7 +878,7 @@ setLoggedIn(true);
           className="login-btn"
           onClick={handleCreateEmployee}
         >
-          직원 등록
+          {t.employeeRegister}
         </button>
       </>
     )}
@@ -969,9 +979,15 @@ setLoggedIn(true);
 
 <h3>🌞 {t.dayShiftStatus} </h3>
 
-<p>{t.total} : : {dayEmployees.length}{t.persons}</p>
-<p>{t.present} : : {dayAttendance.length}{t.persons}</p>
-<p>{t.absent} : {dayEmployees.length - dayAttendance.length}{t.persons}</p>
+<p>
+  {t.total} : {dayEmployees.length}{t.persons}
+  </p>
+<p>
+  {t.present} :  {dayAttendance.length}{t.persons}
+  </p>
+<p>
+  {t.absent} : {dayEmployees.length - dayAttendance.length}{t.persons}
+  </p>
 
 <hr />
 
@@ -1119,7 +1135,7 @@ setLoggedIn(true);
       setActiveTab("attendance")
     }
   >
-    🏠 근태현황
+    🏠 {t.attendanceStatus}
   </button>
 
   <button
@@ -1127,7 +1143,7 @@ setLoggedIn(true);
       setActiveTab("employees")
     }
   >
-    👥 직원관리
+    👥 {t.employeeManagement}
   </button>
 </div>
         </div>

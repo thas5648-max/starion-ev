@@ -146,7 +146,8 @@ departments: {
   "프레스": "Prensa",
   "전착": "Electrodeposición",
   "프레스조립": "Prensa y Ensamble",
-  "증착도장": "Recubrimiento"
+  "증착도장": "Recubrimiento",
+  "품질": "Calidad"
 },
 employeeSearch: "🔍 Buscar nombre o número",
 dayShift: "Turno diurno",
@@ -214,7 +215,8 @@ departments: {
   "프레스": "프레스",
   "전착": "전착",
   "프레스조립": "프레스조립",
-  "증착도장": "증착도장"
+  "증착도장": "증착도장",
+  "품질": "품질"
 },
 employeeSearch: "🔍 이름 또는 사번 검색",
 dayShift: "주간",
@@ -333,7 +335,8 @@ const departmentStats = [
   "프레스",
   "전착",
   "프레스조립",
-  "증착도장"
+  "증착도장",
+  "품질",
 ].map(dept => {
 
   const total =
@@ -862,6 +865,7 @@ setLoggedIn(true);
 <option value="구매">{t.departments["구매"]}</option>
 <option value="영업">{t.departments["영업"]}</option>
 <option value="사출">{t.departments["사출"]}</option>
+<option value="품질">{t.departments["품질"]}</option>
 <option value="조립">{t.departments["조립"]}</option>
 <option value="프레스">{t.departments["프레스"]}</option>
 <option value="전착">{t.departments["전착"]}</option>
@@ -954,6 +958,10 @@ setLoggedIn(true);
   <option value="사출">
     {t.departments["사출"]}
   </option>
+
+<option value="품질">
+  {t.departments["품질"]}
+</option>
 
   <option value="조립">
     {t.departments["조립"]}

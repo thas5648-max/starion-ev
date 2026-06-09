@@ -920,9 +920,45 @@ setLoggedIn(true);
     setSelectedDepartment(e.target.value)
   }
 >
- <option value="전체">
-  {t.all}
-</option>
+  <option value="전체">
+    {t.all}
+  </option>
+
+  <option value="인사">
+    {t.departments["인사"]}
+  </option>
+
+  <option value="구매">
+    {t.departments["구매"]}
+  </option>
+
+  <option value="영업">
+    {t.departments["영업"]}
+  </option>
+
+  <option value="사출">
+    {t.departments["사출"]}
+  </option>
+
+  <option value="조립">
+    {t.departments["조립"]}
+  </option>
+
+  <option value="프레스">
+    {t.departments["프레스"]}
+  </option>
+
+  <option value="전착">
+    {t.departments["전착"]}
+  </option>
+
+  <option value="프레스조립">
+    {t.departments["프레스조립"]}
+  </option>
+
+  <option value="증착도장">
+    {t.departments["증착도장"]}
+  </option>
 </select>
           <h3> {selectedDate} {t.attendanceStatus}</h3>
 

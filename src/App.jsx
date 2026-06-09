@@ -1328,7 +1328,16 @@ setLoggedIn(true);
       return;
     }
 
-    const today = new Date().toISOString().split("T")[0];
+    const now = new Date();
+
+const today =
+  now.toLocaleDateString(
+    "sv-SE",
+    {
+      timeZone:
+        "America/Monterrey"
+    }
+  );
     const { data: existing } = await supabase
       .from("attendance")
       .select("*")
@@ -1388,7 +1397,16 @@ setLoggedIn(true);
 
   async function handleCheckOut() {
 
-    const today = new Date().toISOString().split("T")[0];
+    const now = new Date();
+
+const today =
+  now.toLocaleDateString(
+    "sv-SE",
+    {
+      timeZone:
+        "America/Monterrey"
+    }
+  );
 
     const { error } = await supabase
       .from("attendance")

@@ -229,11 +229,18 @@ records: "건",
 
   const t = text[language];
 
-  const filteredEmployees =
+  const activeEmployees =
+  employeeList.filter(
+    emp =>
+      emp.role === "employee"
+  );
+
+const filteredEmployees =
   selectedDepartment === "전체"
-    ? employeeList
-    : employeeList.filter(
-        emp => emp.department === selectedDepartment
+    ? activeEmployees
+    : activeEmployees.filter(
+        emp =>
+          emp.department === selectedDepartment
       );
 
 const filteredAttendance =
@@ -342,9 +349,9 @@ const departmentStats = [
 ].map(dept => {
 
   const total =
-    employeeList.filter(
-      emp => emp.department === dept
-    ).length;
+  activeEmployees.filter(
+    emp => emp.department === dept
+  ).length;
 
   const present =
     filteredAttendance.filter(

@@ -125,6 +125,7 @@ lateEmployees: "Llegadas tarde",
 logout: "Cerrar sesión",
 checkout: "Registrar salida",
 employeeRegister: "Registrar empleado",
+employeeCreate: "Crear empleado",
 all: "Todos",
 persons: "personas",
 role: "Rol",
@@ -198,6 +199,7 @@ lateEmployees: "지각자",
 logout: "로그아웃",
 checkout: "퇴근 등록",
 employeeRegister: "직원 등록 열기",
+employeeCreate: "직원 등록",
 all: "전체",
 persons: "명",
 role: "권한",
@@ -910,7 +912,7 @@ setLoggedIn(true);
           className="login-btn"
           onClick={handleCreateEmployee}
         >
-          {t.employeeRegister}
+          {t.employeeCreate}
         </button>
       </>
     )}

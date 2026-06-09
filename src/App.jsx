@@ -148,6 +148,10 @@ departments: {
   "프레스조립": "Prensa y Ensamble",
   "증착도장": "Recubrimiento"
 },
+employeeSearch: "🔍 Buscar nombre o número",
+dayShift: "Turno diurno",
+nightShift: "Turno nocturno",
+records: "registros",
     },
     ko: {
       title: "STARION EV",
@@ -212,6 +216,10 @@ departments: {
   "프레스조립": "프레스조립",
   "증착도장": "증착도장"
 },
+employeeSearch: "🔍 이름 또는 사번 검색",
+dayShift: "주간",
+nightShift: "야간",
+records: "건",
     },
   };
 
@@ -628,7 +636,7 @@ setLoggedIn(true);
     <h2>👥 {t.employeeManagement}</h2>
    <input
   type="text"
-  placeholder="🔍 이름 또는 사번 검색"
+  placeholder={t.employeeSearch}
   value={searchText}
   onChange={(e) =>
     setSearchText(e.target.value)
@@ -697,7 +705,7 @@ setLoggedIn(true);
     }}
   >
 
-    <p>부서</p>
+    <p>{t.department}</p>
 
     <select
       value={editDepartment}
@@ -718,7 +726,7 @@ setLoggedIn(true);
 <option value="증착도장">{t.departments["증착도장"]}</option>
     </select>
 
-    <p>근무조</p>
+    <p>{t.shift}</p>
 
     <select
       value={editShift}
@@ -729,13 +737,13 @@ setLoggedIn(true);
         )
       }
     >
-      <option value="주간">
-        주간
-      </option>
+     <option value="주간">
+  {t.dayShift}
+</option>
 
-      <option value="야간">
-        야간
-      </option>
+<option value="야간">
+  {t.nightShift}
+</option>
     </select>
 
     <button
@@ -830,7 +838,7 @@ setLoggedIn(true);
         />
 
         <input
-          placeholder={t.name}
+          placeholder={t.employeeName}
           value={newEmployeeName}
           onChange={(e) =>
             setNewEmployeeName(e.target.value)
@@ -850,15 +858,15 @@ setLoggedIn(true);
   {t.selectDepartment}
 </option>
 
-  <option value="인사">인사</option>
-<option value="구매">구매</option>
-<option value="영업">영업</option>
-<option value="사출">사출</option>
-<option value="조립">조립</option>
-<option value="프레스">프레스</option>
-<option value="전착">전착</option>
-<option value="프레스조립">프레스조립</option>
-<option value="증착도장">증착도장</option>
+  <option value="인사">{t.departments["인사"]}</option>
+<option value="구매">{t.departments["구매"]}</option>
+<option value="영업">{t.departments["영업"]}</option>
+<option value="사출">{t.departments["사출"]}</option>
+<option value="조립">{t.departments["조립"]}</option>
+<option value="프레스">{t.departments["프레스"]}</option>
+<option value="전착">{t.departments["전착"]}</option>
+<option value="프레스조립">{t.departments["프레스조립"]}</option>
+<option value="증착도장">{t.departments["증착도장"]}</option>
 </select>
 <select
   value={newEmployeeShift}
@@ -873,12 +881,12 @@ setLoggedIn(true);
 </option>
 
   <option value="주간">
-    주간
-  </option>
+  {t.dayShift}
+</option>
 
-  <option value="야간">
-    야간
-  </option>
+<option value="야간">
+  {t.nightShift}
+</option>
 </select>
 
 </div>
@@ -1000,7 +1008,7 @@ setLoggedIn(true);
 <h3>🌞 {t.dayShiftStatus} </h3>
 
 <p>
-  {t.total} : {dayEmployees.length}{t.persons}
+  {t.total} : {dayEmployees.length} {t.persons}
   </p>
 <p>
   {t.present} :  {dayAttendance.length}{t.persons}
@@ -1013,7 +1021,7 @@ setLoggedIn(true);
 
 <h3>🌙 {t.nightShiftStatus}</h3>
 
-<p>{t.total} : : {nightEmployees.length}{t.persons}</p>
+<p>{t.total} : {nightEmployees.length} {t.persons}</p>
 <p>{t.present} : : {nightAttendance.length}{t.persons}</p>
 <p>{t.absent} : {nightEmployees.length - nightAttendance.length}{t.persons}</p>
 
@@ -1065,7 +1073,8 @@ setLoggedIn(true);
     )
   }
 >
-  {t.attendanceRecords} ({filteredAttendance.length}건)
+  {t.attendanceRecords}
+({filteredAttendance.length}{t.records})
   {showAttendanceTable ? " ▲" : " ▼"}
 </h3>
 

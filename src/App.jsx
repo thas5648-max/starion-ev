@@ -137,7 +137,17 @@ employeeName: "Nombre",
 selectDepartment: "Seleccionar departamento",
 selectShift: "Seleccionar turno",
 myAttendance: "Mis registros",
-
+departments: {
+  "인사": "Recursos Humanos",
+  "구매": "Compras",
+  "영업": "Ventas",
+  "사출": "Inyección",
+  "조립": "Ensamble",
+  "프레스": "Prensa",
+  "전착": "Electrodeposición",
+  "프레스조립": "Prensa y Ensamble",
+  "증착도장": "Recubrimiento"
+},
     },
     ko: {
       title: "STARION EV",
@@ -191,7 +201,17 @@ employeeName: "이름",
 selectDepartment: "부서 선택",
 selectShift: "근무조 선택",
 myAttendance: "내 출근 기록",
-
+departments: {
+  "인사": "인사",
+  "구매": "구매",
+  "영업": "영업",
+  "사출": "사출",
+  "조립": "조립",
+  "프레스": "프레스",
+  "전착": "전착",
+  "프레스조립": "프레스조립",
+  "증착도장": "증착도장"
+},
     },
   };
 
@@ -667,7 +687,7 @@ setLoggedIn(true);
 
     <br />
 
-    {emp.department} / {emp.shift}
+    {t.departments[emp.department]} / {emp.shift}
     {selectedEmployee?.employee_id === emp.employee_id && (
   <div
     style={{
@@ -687,15 +707,15 @@ setLoggedIn(true);
         )
       }
     >
-      <option value="인사">인사</option>
-      <option value="구매">구매</option>
-      <option value="영업">영업</option>
-      <option value="사출">사출</option>
-      <option value="조립">조립</option>
-      <option value="프레스">프레스</option>
-      <option value="전착">전착</option>
-      <option value="프레스조립">프레스조립</option>
-      <option value="증착도장">증착도장</option>
+      <option value="인사">{t.departments["인사"]}</option>
+<option value="구매">{t.departments["구매"]}</option>
+<option value="영업">{t.departments["영업"]}</option>
+<option value="사출">{t.departments["사출"]}</option>
+<option value="조립">{t.departments["조립"]}</option>
+<option value="프레스">{t.departments["프레스"]}</option>
+<option value="전착">{t.departments["전착"]}</option>
+<option value="프레스조립">{t.departments["프레스조립"]}</option>
+<option value="증착도장">{t.departments["증착도장"]}</option>
     </select>
 
     <p>근무조</p>
@@ -768,7 +788,7 @@ setLoggedIn(true);
   className="action-btn checkout-btn"
   onClick={handleCheckOut}
 >
-            퇴근 등록
+            {t.checkout}
           </button>
           <div className="bottom-buttons">
 
@@ -831,14 +851,14 @@ setLoggedIn(true);
 </option>
 
   <option value="인사">인사</option>
-  <option value="구매">구매</option>
-  <option value="영업">영업</option>
-  <option value="사출">사출</option>
-  <option value="조립">조립</option>
-  <option value="프레스">프레스</option>
-  <option value="전착">전착</option>
-  <option value="프레스조립">프레스조립</option>
-  <option value="증착도장">증착도장</option>
+<option value="구매">구매</option>
+<option value="영업">영업</option>
+<option value="사출">사출</option>
+<option value="조립">조립</option>
+<option value="프레스">프레스</option>
+<option value="전착">전착</option>
+<option value="프레스조립">프레스조립</option>
+<option value="증착도장">증착도장</option>
 </select>
 <select
   value={newEmployeeShift}
@@ -954,7 +974,7 @@ setLoggedIn(true);
     {departmentStats.map(d => (
       <tr key={d.dept}>
 
-        <td>{d.dept}</td>
+        <td>{t.departments[d.dept]}</td>
 
         <td>{d.present}</td>
 
